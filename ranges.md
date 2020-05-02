@@ -36,8 +36,8 @@
 
 	#if ranges_IMPL
 		static int to_index(const File &in, const std::string &n) {
-			for (int i { 1 } ; i <= in.columns(); ++i) {
-				if (n == in.header(i)) {
+			for (int i { 1 }; i <= in.columns(); ++i) {
+				if (in.header()[i] == n) {
 					return i;
 				}
 			}

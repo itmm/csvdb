@@ -38,16 +38,17 @@
 ```
 
 ```
+@inc(entries.md)
+```
+
+```
 @def(includes)
-	#include <string>
-	#include <vector>
+	#include "entries.h"
 @end(includes)
 ```
 
 ```
 @def(privates)
-	using Entries =
-		std::vector<std::string>;
 	Entries header_;
 	Entries entries_;
 @end(privates)
@@ -73,96 +74,42 @@
 ```
 
 ```
+@add(includes)
+	#include <string>
+@end(includes)
+```
+
+```
 @def(next line)
 	std::string line;
 	if (! std::getline(in_, line)) {
 		return false;
 	}
-	entries_.clear();
-	@put(fill entries);
+	entries_ = Entries { line };
 	return true;
 @end(next line)
 ```
 
 ```
-@def(fill entries)
-	size_t old { 0 };
-	for (;;) {
-		size_t pos { line.find(
-			'\t', old
-		) };
-		if (pos == std::string::npos) {
-			@put(push last entry);
-			break;
-		}
-		@put(push entry);
-		old = pos + 1;
-	}
-@end(fill entries)
-```
-
-```
-@def(push last entry)
-	entries_.push_back(
-		line.substr(old)
-	);
-@end(push last entry)
-```
-
-```
-@def(push entry)
-	entries_.push_back(
-		line.substr(old, pos - old)
-	);
-@end(push entry)
-```
-
-```
-@add(privates)
-	const std::string &get(
-		int i, const Entries &entries
-	) const {
-		static std::string empty;
-		@put(get);
-		return empty;
-	}
-@end(privates)
-```
-
-```
 @add(publics)
-	const std::string &header(
-		int i
-	) const {
-		return get(i, header_);
+	const Entries &header() const {
+		return header_;
 	}
 @end(publics)
 ```
 
 ```
 @add(publics)
-	const std::string &entry(
-		int i
-	) const {
-		return get(i, entries_);
+	const Entries &entries() const {
+		return entries_;
 	}
 @end(publics)
-```
-
-```
-@def(get)
-	if (i > 0 && i <= static_cast<int>(
-			entries.size()
-	)) {
-		return entries[i - 1];
-	}
-@end(get)
 ```
 
 ```
 @add(publics)
 	int columns() const {
-		return header_.size();
+		return header_.columns();
 	}
 @end(publics)
 ```

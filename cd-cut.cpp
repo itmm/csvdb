@@ -13,13 +13,13 @@
 
 	void write_line(
 		const File &f, const Ranges &rngs,
-		const std::string &(File::*fn)(int) const
+		const Entries &entries
 	) {
 		bool first { true };
 		for (const auto &r : rngs) {
 			for (int i { r.from() };
 				i <= r.to() &&
-					i <= f.columns();
+					i <= entries.columns();
 				++i
 			) {
 				if (first) { 
@@ -27,7 +27,7 @@
 				} else {
 					std::cout << '\t';
 				}
-				std::cout << (f.*fn)(i);
+				std::cout << entries[i];
 			}
 		}
 		std::cout << '\n';
@@ -48,9 +48,9 @@
 
 #line 67 "cut.md"
 
-	write_line(in, rngs, &File::header);
+	write_line(in, rngs, in.header());
 	while (in.next_line()) {
-		write_line(in, rngs, &File::entry);
+		write_line(in, rngs, in.entries());
 	}
 
 #line 9 "cut.md"
