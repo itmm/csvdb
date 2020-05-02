@@ -8,3 +8,7 @@
 @inc(sort.md)
 ```
 
+```
+@inc(add.md)
+```
+
