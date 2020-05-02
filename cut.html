@@ -47,8 +47,9 @@
 <div class="page"><div class="slide"><div class="slide-nr">6</div>
 <code>
 <span class="macro">@def(<span class="name">main</span>)</span><br/>
+<span class="in1"></span><span class="type">File</span> <span class="keyword">in</span> { <span class="type">std</span>::<span class="var">cin</span> };<br/>
 <span class="in1"></span><span class="type">Ranges</span> <span class="var">rngs</span> { <span class="fn">parse_ranges</span>(<br/>
-<span class="in2"></span><span class="var">argv</span> + <span class="num">1</span>, <span class="var">argc</span> - <span class="num">1</span><br/>
+<span class="in2"></span><span class="keyword">in</span>, <span class="var">argv</span> + <span class="num">1</span>, <span class="var">argc</span> - <span class="num">1</span><br/>
 <span class="in1"></span>) };<br/>
 <span class="macro">@end(<span class="name">main</span>)</span><br/>
 </code></div>
@@ -83,7 +84,6 @@
 <div class="page"><div class="slide"><div class="slide-nr">8</div>
 <code>
 <span class="macro">@add(<span class="name">main</span>)</span><br/>
-<span class="in1"></span><span class="type">File</span> <span class="keyword">in</span> { <span class="type">std</span>::<span class="var">cin</span> };<br/>
 <span class="in1"></span><span class="fn">write_line</span>(<span class="keyword">in</span>, <span class="var">rngs</span>, &amp;<span class="type">File</span>::<span class="var">header</span>);<br/>
 <span class="in1"></span><span class="keyword">while</span> (<span class="keyword">in</span>.<span class="fn">next_line</span>()) {<br/>
 <span class="in2"></span><span class="fn">write_line</span>(<span class="keyword">in</span>, <span class="var">rngs</span>, &amp;<span class="type">File</span>::<span class="var">entry</span>);<br/>

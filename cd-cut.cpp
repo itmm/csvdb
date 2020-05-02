@@ -9,7 +9,7 @@
 	#include <iostream>
 	#include <string>
 
-#line 40 "cut.md"
+#line 41 "cut.md"
 
 	void write_line(
 		const File &f, const Ranges &rngs,
@@ -41,13 +41,13 @@
 		
 #line 32 "cut.md"
 
+	File in { std::cin };
 	Ranges rngs { parse_ranges(
-		argv + 1, argc - 1
+		in, argv + 1, argc - 1
 	) };
 
-#line 66 "cut.md"
+#line 67 "cut.md"
 
-	File in { std::cin };
 	write_line(in, rngs, &File::header);
 	while (in.next_line()) {
 		write_line(in, rngs, &File::entry);

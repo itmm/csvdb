@@ -8,9 +8,14 @@
 ```
 
 ```
+@inc(file.md)
+```
+
+```
 @Def(file: libs/ranges.h)
 	#pragma once
 
+	#include "file.h"
 	#include <limits>
 	#include <vector>
 	#include <string>
@@ -29,20 +34,31 @@
 
 	using Ranges = std::vector<Range>;
 
-	Range parse_range(std::string rng)
+	#if ranges_IMPL
+		static int to_index(const File &in, const std::string &n) {
+			for (int i { 1 } ; i <= in.columns(); ++i) {
+				if (n == in.header(i)) {
+					return i;
+				}
+			}
+			return std::stoi(n);
+		}
+	#endif
+
+	Range parse_range(const File &in, std::string rng)
 	#if ranges_IMPL
 		{
 			size_t sep { rng.find('-') };
 			int from { 0 };
 			int to { std::numeric_limits<int>::max() };
 			if (sep == std::string::npos) {
-				from = to = std::stoi(rng);
+				from = to = to_index(in, rng);
 			} else {
 				if (sep > 0) {
-					from = std::stoi(rng.substr(0, sep));
+					from = to_index(in, rng.substr(0, sep));
 				}
 				if (sep + 1 < rng.size()) {
-					to = std::stoi(rng.substr(sep + 1));
+					to = to_index(in, rng.substr(sep + 1));
 				}
 			}
 			return Range { from, to };
@@ -51,7 +67,7 @@
 		;
 	#endif
 
-	Ranges parse_ranges(const char **args, int cnt)
+	Ranges parse_ranges(const File &in, const char **args, int cnt)
 	#if ranges_IMPL
 		{
 			Ranges rngs;
@@ -76,10 +92,10 @@
 	for (;;) {
 		size_t pos { arg.find(',', old) };
 		if (pos == std::string::npos) {
-			rngs.push_back(parse_range(arg.substr(old)));
+			rngs.push_back(parse_range(in, arg.substr(old)));
 			break;
 		} else {
-			rngs.push_back(parse_range(arg.substr(old, pos - old)));
+			rngs.push_back(parse_range(in, arg.substr(old, pos - old)));
 			old = pos + 1;
 		}
 	}

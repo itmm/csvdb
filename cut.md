@@ -30,8 +30,9 @@
 
 ```
 @def(main)
+	File in { std::cin };
 	Ranges rngs { parse_ranges(
-		argv + 1, argc - 1
+		in, argv + 1, argc - 1
 	) };
 @end(main)
 ```
@@ -64,7 +65,6 @@
 
 ```
 @add(main)
-	File in { std::cin };
 	write_line(in, rngs, &File::header);
 	while (in.next_line()) {
 		write_line(in, rngs, &File::entry);
