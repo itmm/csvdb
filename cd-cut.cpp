@@ -17,6 +17,9 @@
 	) {
 		bool first { true };
 		for (const auto &r : rngs) {
+			if (r.from() > entries.columns()) {
+				std::cerr << "not enough columns in data\n";
+			}
 			for (int i { r.from() };
 				i <= r.to() &&
 					i <= entries.columns();
@@ -46,7 +49,7 @@
 		in, argv + 1, argc - 1
 	) };
 
-#line 67 "cut.md"
+#line 70 "cut.md"
 
 	write_line(in, rngs, in.header());
 	while (in.next_line()) {

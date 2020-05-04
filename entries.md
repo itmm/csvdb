@@ -31,9 +31,17 @@
 
 ```
 @def(publics)
-	Entries() {}
 	bool parse(std::istream &in);
-	static std::string escape(const std::string &value);
+	void empty(int columns) {
+		entries_.clear();
+		for (int i { columns }; i; --i) {
+			entries_.push_back("");
+		}
+	}
+
+	static std::string escape(
+		const std::string &value
+	);
 @end(publics)
 ```
 
@@ -51,6 +59,7 @@
 @add(includes)
 	#include <string>
 	#include <vector>
+	#include <iostream>
 @end(includes)
 ```
 
@@ -66,7 +75,13 @@
 	std::string entry;
 	int ch { in.get() };
 	for (;;) {
-		if (ch == EOF) { return false; }
+		if (ch == EOF) {
+			if (! entries_.empty() || ! entry.empty()) {
+				std::cerr << "unexpected end of file\n";
+			}
+			entries_.push_back(entry);
+			return false;
+		}
 		if (ch == ',') {
 			entries_.push_back(entry);
 			entry.clear();
@@ -75,12 +90,20 @@
 		}
 		if (ch == '\r') {
 			entries_.push_back(entry);
-			return in.get() == '\n';
+			if (in.get() != '\n') {
+				std::cerr << "no dos line ending\n";
+				return false;
+			}
+			return true;
 		}
 		if (ch == '"') {
 			ch = in.get();
 			for (;;) {
-				if (ch == EOF) { return false; }
+				if (ch == EOF) {
+					std::cerr << "end of file in quoted entry\n";
+					entries_.push_back(entry);
+					return false;
+				}
 				if (ch == '"') {
 					ch = in.get();
 					if (ch != '"') {

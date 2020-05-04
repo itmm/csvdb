@@ -6,12 +6,13 @@
 #line 45 "file.md"
 
 	#include "entries.h"
+	#include <iostream>
 
-#line 58 "file.md"
+#line 59 "file.md"
 
 	#include <istream>
 
-#line 77 "file.md"
+#line 80 "file.md"
 
 	#include <string>
 
@@ -20,12 +21,12 @@
 	class File {
 		private:
 			
-#line 51 "file.md"
+#line 52 "file.md"
 
 	Entries header_;
 	Entries entries_;
 
-#line 64 "file.md"
+#line 65 "file.md"
 
 	std::istream &in_;
 
@@ -37,27 +38,29 @@
 
 	bool next_line();
 
-#line 67 "file.md"
+#line 68 "file.md"
 
 	File(std::istream &in): in_ { in } {
 		if (next_line()) {
 			header_ = entries_;
+		} else {
+			std::cerr << "no header found\n";
 		}
 	}
 
-#line 89 "file.md"
+#line 92 "file.md"
 
 	const Entries &header() const {
 		return header_;
 	}
 
-#line 97 "file.md"
+#line 100 "file.md"
 
 	const Entries &entries() const {
 		return entries_;
 	}
 
-#line 105 "file.md"
+#line 108 "file.md"
 
 	int columns() const {
 		return header_.columns();
@@ -72,7 +75,7 @@
 
 	bool File::next_line() {
 		
-#line 83 "file.md"
+#line 86 "file.md"
 
 	return entries_.parse(in_);
 

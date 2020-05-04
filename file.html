@@ -62,6 +62,7 @@
 <code>
 <span class="macro">@def(<span class="name">includes</span>)</span><br/>
 <span class="in1"></span><span class="keyword">#include</span> <span class="str">"entries.h"</span><br/>
+<span class="in1"></span><span class="keyword">#include</span> &lt;<span class="var">iostream</span>&gt;<br/>
 <span class="macro">@end(<span class="name">includes</span>)</span><br/>
 </code></div>
 </div>
@@ -89,6 +90,8 @@
 <span class="in1"></span><span class="fn">File</span>(<span class="type">std</span>::<span class="type">istream</span> &amp;<span class="keyword">in</span>): <span class="var">in_</span> { <span class="keyword">in</span> } {<br/>
 <span class="in2"></span><span class="keyword">if</span> (<span class="fn">next_line</span>()) {<br/>
 <span class="in3"></span><span class="var">header_</span> = <span class="var">entries_</span>;<br/>
+<span class="in2"></span>} <span class="keyword">else</span> {<br/>
+<span class="in3"></span><span class="type">std</span>::<span class="var">cerr</span> &lt;&lt; <span class="str">"no header found\n"</span>;<br/>
 <span class="in2"></span>}<br/>
 <span class="in1"></span>}<br/>
 <span class="macro">@end(<span class="name">publics</span>)</span><br/>

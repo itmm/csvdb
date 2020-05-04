@@ -45,6 +45,9 @@
 	) {
 		bool first { true };
 		for (const auto &r : rngs) {
+			if (r.from() > entries.columns()) {
+				std::cerr << "not enough columns in data\n";
+			}
 			for (int i { r.from() };
 				i <= r.to() &&
 					i <= entries.columns();

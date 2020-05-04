@@ -12,3 +12,7 @@
 @inc(add.md)
 ```
 
+```
+@inc(join.md)
+```
+

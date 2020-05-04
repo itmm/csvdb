@@ -44,6 +44,7 @@
 ```
 @def(includes)
 	#include "entries.h"
+	#include <iostream>
 @end(includes)
 ```
 
@@ -68,6 +69,8 @@
 	File(std::istream &in): in_ { in } {
 		if (next_line()) {
 			header_ = entries_;
+		} else {
+			std::cerr << "no header found\n";
 		}
 	}
 @end(publics)

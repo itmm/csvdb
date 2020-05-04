@@ -1,4 +1,5 @@
 cd-add
 cd-cut
+cd-join
 cd-sort
 *.o
