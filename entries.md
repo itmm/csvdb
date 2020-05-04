@@ -25,21 +25,22 @@
 
 ```
 @def(includes)
-	#include <string>
+	#include <istream>
 @end(includes)
 ```
 
 ```
 @def(publics)
 	Entries() {}
-	Entries(const std::string &line);
+	bool parse(std::istream &in);
+	static std::string escape(const std::string &value);
 @end(publics)
 ```
 
 ```
 @def(impl)
-	Entries::Entries(
-		const std::string &line
+	bool Entries::parse(
+		std::istream &in
 	) {
 		@put(parse);
 	}
@@ -48,6 +49,7 @@
 
 ```
 @add(includes)
+	#include <string>
 	#include <vector>
 @end(includes)
 ```
@@ -60,35 +62,72 @@
 
 ```
 @def(parse)
-	size_t old { 0 };
+	entries_.clear();
+	std::string entry;
+	int ch { in.get() };
 	for (;;) {
-		size_t pos { line.find(
-			'\t', old
-		) };
-		if (pos == std::string::npos) {
-			@put(push last entry);
-			break;
+		if (ch == EOF) { return false; }
+		if (ch == ',') {
+			entries_.push_back(entry);
+			entry.clear();
+			ch = in.get();
+			continue;
 		}
-		@put(push entry);
-		old = pos + 1;
+		if (ch == '\r') {
+			entries_.push_back(entry);
+			return in.get() == '\n';
+		}
+		if (ch == '"') {
+			ch = in.get();
+			for (;;) {
+				if (ch == EOF) { return false; }
+				if (ch == '"') {
+					ch = in.get();
+					if (ch != '"') {
+						break;
+					}
+				}
+				entry += (char) ch;
+				ch = in.get();
+			}
+			continue;
+		}
+		entry += (char) ch;
+		ch = in.get();
 	}
 @end(parse)
 ```
 
 ```
-@def(push last entry)
-	entries_.push_back(
-		line.substr(old)
-	);
-@end(push last entry)
-```
-
-```
-@def(push entry)
-	entries_.push_back(
-		line.substr(old, pos - old)
-	);
-@end(push entry)
+@add(impl)
+	std::string Entries::escape(const std::string &value) {
+		bool needs_escape { false };
+		for (char ch : value) {
+			switch (ch) {
+				case '"':
+				case ',':
+				case '\r':
+				case '\n':
+					needs_escape = true;
+					break;
+				default:
+					break;
+			}
+			if (needs_escape) { break; }
+		}
+		if (! needs_escape) { return value; }
+		std::string escaped;
+		escaped += '"';
+		for (char ch : value) {
+			escaped += ch;
+			if (ch == '"') {
+				escaped += ch;
+			}
+		}
+		escaped += '"';
+		return escaped;
+	}
+@end(impl)
 ```
 
 ```

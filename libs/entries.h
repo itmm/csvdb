@@ -5,10 +5,11 @@
 	
 #line 27 "entries.md"
 
+	#include <istream>
+
+#line 51 "entries.md"
+
 	#include <string>
-
-#line 50 "entries.md"
-
 	#include <vector>
 
 #line 13 "entries.md"
@@ -16,11 +17,11 @@
 	class Entries {
 		private:
 			
-#line 56 "entries.md"
+#line 58 "entries.md"
 
 	std::vector<std::string> entries_;
 
-#line 95 "entries.md"
+#line 134 "entries.md"
 
 	static std::string empty_;
 
@@ -31,15 +32,16 @@
 #line 33 "entries.md"
 
 	Entries() {}
-	Entries(const std::string &line);
+	bool parse(std::istream &in);
+	static std::string escape(const std::string &value);
 
-#line 107 "entries.md"
+#line 146 "entries.md"
 
 	const std::string &operator[](
 		int i
 	) const {
 		
-#line 118 "entries.md"
+#line 157 "entries.md"
 
 	if (i > 0 && i <= static_cast<int>(
 			entries_.size()
@@ -47,12 +49,12 @@
 		return entries_[i - 1];
 	}
 
-#line 111 "entries.md"
+#line 150 "entries.md"
 ;
 		return empty_;
 	}
 
-#line 128 "entries.md"
+#line 167 "entries.md"
 
 	int columns() const {
 		return entries_.size();
@@ -63,48 +65,83 @@
 	};
 	#if entries_IMPL
 		
-#line 40 "entries.md"
+#line 41 "entries.md"
 
-	Entries::Entries(
-		const std::string &line
+	bool Entries::parse(
+		std::istream &in
 	) {
 		
-#line 62 "entries.md"
+#line 64 "entries.md"
 
-	size_t old { 0 };
+	entries_.clear();
+	std::string entry;
+	int ch { in.get() };
 	for (;;) {
-		size_t pos { line.find(
-			'\t', old
-		) };
-		if (pos == std::string::npos) {
-			
-#line 79 "entries.md"
-
-	entries_.push_back(
-		line.substr(old)
-	);
-
-#line 69 "entries.md"
-;
-			break;
+		if (ch == EOF) { return false; }
+		if (ch == ',') {
+			entries_.push_back(entry);
+			entry.clear();
+			ch = in.get();
+			continue;
 		}
-		
-#line 87 "entries.md"
-
-	entries_.push_back(
-		line.substr(old, pos - old)
-	);
-
-#line 72 "entries.md"
-;
-		old = pos + 1;
+		if (ch == '\r') {
+			entries_.push_back(entry);
+			return in.get() == '\n';
+		}
+		if (ch == '"') {
+			ch = in.get();
+			for (;;) {
+				if (ch == EOF) { return false; }
+				if (ch == '"') {
+					ch = in.get();
+					if (ch != '"') {
+						break;
+					}
+				}
+				entry += (char) ch;
+				ch = in.get();
+			}
+			continue;
+		}
+		entry += (char) ch;
+		ch = in.get();
 	}
 
-#line 44 "entries.md"
+#line 45 "entries.md"
 ;
 	}
 
-#line 101 "entries.md"
+#line 102 "entries.md"
+
+	std::string Entries::escape(const std::string &value) {
+		bool needs_escape { false };
+		for (char ch : value) {
+			switch (ch) {
+				case '"':
+				case ',':
+				case '\r':
+				case '\n':
+					needs_escape = true;
+					break;
+				default:
+					break;
+			}
+			if (needs_escape) { break; }
+		}
+		if (! needs_escape) { return value; }
+		std::string escaped;
+		escaped += '"';
+		for (char ch : value) {
+			escaped += ch;
+			if (ch == '"') {
+				escaped += ch;
+			}
+		}
+		escaped += '"';
+		return escaped;
+	}
+
+#line 140 "entries.md"
 
 	std::string Entries::empty_;
 

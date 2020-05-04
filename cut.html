@@ -71,12 +71,12 @@
 <span class="in4"></span><span class="keyword">if</span> (<span class="var">first</span>) { <br/>
 <span class="in5"></span><span class="var">first</span> = <span class="num">false</span>;<br/>
 <span class="in4"></span>} <span class="keyword">else</span> {<br/>
-<span class="in5"></span><span class="type">std</span>::<span class="var">cout</span> &lt;&lt; <span class="str">'\t'</span>;<br/>
+<span class="in5"></span><span class="type">std</span>::<span class="var">cout</span> &lt;&lt; <span class="str">','</span>;<br/>
 <span class="in4"></span>}<br/>
-<span class="in4"></span><span class="type">std</span>::<span class="var">cout</span> &lt;&lt; <span class="var">entries</span>[<span class="var">i</span>];<br/>
+<span class="in4"></span><span class="type">std</span>::<span class="var">cout</span> &lt;&lt; <span class="type">Entries</span>::<span class="fn">escape</span>(<span class="var">entries</span>[<span class="var">i</span>]);<br/>
 <span class="in3"></span>}<br/>
 <span class="in2"></span>}<br/>
-<span class="in2"></span><span class="type">std</span>::<span class="var">cout</span> &lt;&lt; <span class="str">'\n'</span>;<br/>
+<span class="in2"></span><span class="type">std</span>::<span class="var">cout</span> &lt;&lt; <span class="str">"\r\n"</span>;<br/>
 <span class="in1"></span>}<br/>
 <span class="macro">@end(<span class="name">globals</span>)</span><br/>
 </code></div>

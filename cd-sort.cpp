@@ -20,11 +20,11 @@
 			if (first) { 
 				first = false;
 			} else {
-				std::cout << '\t';
+				std::cout << ',';
 			}
-			std::cout << entries[i];
+			std::cout << Entries::escape(entries[i]);
 		}
-		std::cout << '\n';
+		std::cout << "\r\n";
 	}
 
 #line 61 "sort.md"

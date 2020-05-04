@@ -104,12 +104,7 @@
 <div class="page"><div class="slide"><div class="slide-nr">12</div>
 <code>
 <span class="macro">@def(<span class="name">next line</span>)</span><br/>
-<span class="in1"></span><span class="type">std</span>::<span class="type">string</span> <span class="var">line</span>;<br/>
-<span class="in1"></span><span class="keyword">if</span> (! <span class="type">std</span>::<span class="fn">getline</span>(<span class="var">in_</span>, <span class="var">line</span>)) {<br/>
-<span class="in2"></span><span class="keyword">return</span> <span class="num">false</span>;<br/>
-<span class="in1"></span>}<br/>
-<span class="in1"></span><span class="var">entries_</span> = <span class="type">Entries</span> { <span class="var">line</span> };<br/>
-<span class="in1"></span><span class="keyword">return</span> <span class="num">true</span>;<br/>
+<span class="in1"></span><span class="keyword">return</span> <span class="var">entries_</span>.<span class="fn">parse</span>(<span class="var">in_</span>);<br/>
 <span class="macro">@end(<span class="name">next line</span>)</span><br/>
 </code></div>
 </div>

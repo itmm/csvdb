@@ -81,12 +81,7 @@
 
 ```
 @def(next line)
-	std::string line;
-	if (! std::getline(in_, line)) {
-		return false;
-	}
-	entries_ = Entries { line };
-	return true;
+	return entries_.parse(in_);
 @end(next line)
 ```
 

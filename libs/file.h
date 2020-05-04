@@ -45,19 +45,19 @@
 		}
 	}
 
-#line 94 "file.md"
+#line 89 "file.md"
 
 	const Entries &header() const {
 		return header_;
 	}
 
-#line 102 "file.md"
+#line 97 "file.md"
 
 	const Entries &entries() const {
 		return entries_;
 	}
 
-#line 110 "file.md"
+#line 105 "file.md"
 
 	int columns() const {
 		return header_.columns();
@@ -74,12 +74,7 @@
 		
 #line 83 "file.md"
 
-	std::string line;
-	if (! std::getline(in_, line)) {
-		return false;
-	}
-	entries_ = Entries { line };
-	return true;
+	return entries_.parse(in_);
 
 #line 35 "file.md"
 ;
