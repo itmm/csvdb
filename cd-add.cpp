@@ -14,15 +14,7 @@
 		const Entries &entries,
 		const char **argv, int argc
 	) {
-		bool first { true };
-		for (int i { 1 }; i <= entries.columns(); ++i) {
-			if (first) { 
-				first = false;
-			} else {
-				std::cout << ',';
-			}
-			std::cout << Entries::escape(entries[i]);
-		}
+		bool first { entries.write(true, false) };
 		for (int i { 0 }; i < argc; ++i) {
 			std::string v { argv[i] };
 			for (int j { 1 }; j <= entries.columns(); ++j) {
@@ -53,7 +45,7 @@
 
 	File in { std::cin };
 
-#line 74 "add.md"
+#line 66 "add.md"
 
 	write_line(in.header(), argv + 1, argc - 1);
 	while (in.next_line()) {

@@ -3,11 +3,11 @@
 
 	#pragma once
 	
-#line 27 "entries.md"
+#line 30 "entries.md"
 
 	#include <istream>
 
-#line 59 "entries.md"
+#line 62 "entries.md"
 
 	#include <string>
 	#include <vector>
@@ -15,22 +15,25 @@
 
 #line 13 "entries.md"
 ;
+	#include <vector>
+	class Range;
+	using Ranges = std::vector<Range>;
 	class Entries {
 		private:
 			
-#line 67 "entries.md"
+#line 70 "entries.md"
 
 	std::vector<std::string> entries_;
 
-#line 157 "entries.md"
+#line 160 "entries.md"
 
 	static std::string empty_;
 
-#line 16 "entries.md"
+#line 19 "entries.md"
 ;
 		public:
 			
-#line 33 "entries.md"
+#line 36 "entries.md"
 
 	bool parse(std::istream &in);
 	void empty(int columns) {
@@ -44,13 +47,13 @@
 		const std::string &value
 	);
 
-#line 169 "entries.md"
+#line 172 "entries.md"
 
 	const std::string &operator[](
 		int i
 	) const {
 		
-#line 180 "entries.md"
+#line 183 "entries.md"
 
 	if (i > 0 && i <= static_cast<int>(
 			entries_.size()
@@ -58,29 +61,34 @@
 		return entries_[i - 1];
 	}
 
-#line 173 "entries.md"
+#line 176 "entries.md"
 ;
 		return empty_;
 	}
 
-#line 190 "entries.md"
+#line 193 "entries.md"
 
 	int columns() const {
 		return entries_.size();
 	}
 
-#line 18 "entries.md"
+#line 201 "entries.md"
+
+	bool write(const Ranges &rngs, bool first = true, bool with_eol = true) const;
+	bool write(bool first = true, bool with_eol = true) const;
+
+#line 21 "entries.md"
 ;
 	};
 	#if entries_IMPL
 		
-#line 49 "entries.md"
+#line 52 "entries.md"
 
 	bool Entries::parse(
 		std::istream &in
 	) {
 		
-#line 73 "entries.md"
+#line 76 "entries.md"
 
 	entries_.clear();
 	std::string entry;
@@ -130,11 +138,11 @@
 		ch = in.get();
 	}
 
-#line 53 "entries.md"
+#line 56 "entries.md"
 ;
 	}
 
-#line 125 "entries.md"
+#line 128 "entries.md"
 
 	std::string Entries::escape(const std::string &value) {
 		bool needs_escape { false };
@@ -164,10 +172,34 @@
 		return escaped;
 	}
 
-#line 163 "entries.md"
+#line 166 "entries.md"
 
 	std::string Entries::empty_;
 
-#line 21 "entries.md"
+#line 208 "entries.md"
+
+	#include "ranges.h"
+	bool Entries::write(const Ranges &rngs, bool first, bool with_eol) const {
+		for (const auto &r : rngs) {
+			int f { r.from() };
+			for (; f <= r.to() && f <= columns(); ++f) {
+				if (first) {
+					first = false;
+				} else {
+					std::cout << ',';
+				}
+				std::cout << escape(entries_[f - 1]);
+			}
+		}
+		if (with_eol) { std::cout << "\r\n"; }
+		return first;
+	}
+	bool Entries::write(bool first, bool with_eol) const {
+		Ranges rngs;
+		rngs.push_back(Range {});
+		return write(rngs, first, with_eol);
+	}
+
+#line 24 "entries.md"
 ;
 	#endif

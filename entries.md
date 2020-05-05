@@ -11,6 +11,9 @@
 @Def(file: libs/entries.h)
 	#pragma once
 	@put(includes);
+	#include <vector>
+	class Range;
+	using Ranges = std::vector<Range>;
 	class Entries {
 		private:
 			@put(privates);
@@ -174,9 +177,9 @@
 		return empty_;
 	}
 @end(publics)
-	
 ```
 
+```
 @def(get)
 	if (i > 0 && i <= static_cast<int>(
 			entries_.size()
@@ -194,3 +197,35 @@
 @end(publics)
 ```
 
+```
+@add(publics)
+	bool write(const Ranges &rngs, bool first = true, bool with_eol = true) const;
+	bool write(bool first = true, bool with_eol = true) const;
+@end(publics)
+```
+
+```
+@add(impl)
+	#include "ranges.h"
+	bool Entries::write(const Ranges &rngs, bool first, bool with_eol) const {
+		for (const auto &r : rngs) {
+			int f { r.from() };
+			for (; f <= r.to() && f <= columns(); ++f) {
+				if (first) {
+					first = false;
+				} else {
+					std::cout << ',';
+				}
+				std::cout << escape(entries_[f - 1]);
+			}
+		}
+		if (with_eol) { std::cout << "\r\n"; }
+		return first;
+	}
+	bool Entries::write(bool first, bool with_eol) const {
+		Ranges rngs;
+		rngs.push_back(Range {});
+		return write(rngs, first, with_eol);
+	}
+@end(impl)
+```

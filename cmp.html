@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Comparing entries</title>
+<link rel="stylesheet" type="text/css" href="slides/slides.css"></head>
+<body>
+<h1>Comparing entries</h1>
+<div class="slides">
+<div class="page">
+<div class="slide"><div class="slide-nr">1</div><div class="headers">
+<h1>Comparing entries</h1>
+</div></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">2</div>
+<code>
+<span class="macro">@Def(<span class="name">file: libs/cmp.h</span>)</span><br/>
+<span class="in1"></span><span class="keyword">#pragma</span> <span class="keyword">once</span><br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">includes</span>)</span><br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">globals</span>)</span><br/>
+<span class="macro">@End(<span class="name">file: libs/cmp.h</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">3</div>
+<code>
+<span class="macro">@Def(<span class="name">file: libs/cmp.cpp</span>)</span><br/>
+<span class="in1"></span><span class="keyword">#define</span> <span class="var">cmp_IMPL</span> <span class="num">1</span><br/>
+<span class="in1"></span><span class="keyword">#include</span> <span class="str">"cmp.h"</span><br/>
+<span class="macro">@End(<span class="name">file: libs/cmp.cpp</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">4</div>
+<code>
+<span class="macro">@inc(<span class="name"><a href="entries.html">entries.md</a></span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">5</div>
+<code>
+<span class="macro">@def(<span class="name">includes</span>)</span><br/>
+<span class="in1"></span><span class="keyword">#include</span> <span class="str">"entries.h"</span><br/>
+<span class="macro">@end(<span class="name">includes</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">6</div>
+<code>
+<span class="macro">@inc(<span class="name"><a href="ranges.html">ranges.md</a></span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">7</div>
+<code>
+<span class="macro">@add(<span class="name">includes</span>)</span><br/>
+<span class="in1"></span><span class="keyword">#include</span> <span class="str">"ranges.h"</span><br/>
+<span class="macro">@end(<span class="name">includes</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">8</div>
+<code>
+<span class="macro">@def(<span class="name">globals</span>)</span><br/>
+<span class="in1"></span><span class="type">int</span> <span class="fn">compare</span>(<br/>
+<span class="in2"></span><span class="type">const</span> <span class="type">Entries</span> &amp;<span class="var">en1</span>,<br/>
+<span class="in2"></span><span class="type">const</span> <span class="type">Ranges</span> &amp;<span class="var">rn1</span>,<br/>
+<span class="in2"></span><span class="type">const</span> <span class="type">Entries</span> &amp;<span class="var">en2</span>,<br/>
+<span class="in2"></span><span class="type">const</span> <span class="type">Ranges</span> &amp;<span class="var">rn2</span><br/>
+<span class="in1"></span>)<br/>
+<span class="in1"></span><span class="keyword">#if</span> <span class="var">cmp_IMPL</span><br/>
+<span class="in2"></span>{<br/>
+<span class="in3"></span><span class="macro">@put(<span class="name">compare</span>)</span>;<br/>
+<span class="in2"></span>}<br/>
+<span class="in1"></span><span class="keyword">#else</span><br/>
+<span class="in2"></span>;<br/>
+<span class="in1"></span><span class="keyword">#endif</span><br/>
+<span class="macro">@end(<span class="name">globals</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">9</div>
+<code>
+<span class="macro">@def(<span class="name">compare</span>)</span><br/>
+<span class="in1"></span><span class="type">auto</span> <span class="var">r1</span> { <span class="var">rn1</span>.<span class="fn">begin</span>() };<br/>
+<span class="in1"></span><span class="type">int</span> <span class="var">f1</span>, <span class="var">t1</span>;<br/>
+<span class="in1"></span><span class="type">auto</span> <span class="var">r2</span> { <span class="var">rn2</span>.<span class="fn">begin</span>() };<br/>
+<span class="in1"></span><span class="type">int</span> <span class="var">f2</span>, <span class="var">t2</span>;<br/>
+<span class="macro">@end(<span class="name">compare</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">10</div>
+<code>
+<span class="macro">@add(<span class="name">compare</span>)</span><br/>
+<span class="in1"></span><span class="keyword">if</span> (<span class="var">r1</span> != <span class="var">rn1</span>.<span class="fn">end</span>()) {<br/>
+<span class="in2"></span><span class="var">f1</span> = <span class="var">r1</span>-&gt;<span class="fn">from</span>();<br/>
+<span class="in2"></span><span class="var">t1</span> = <span class="var">r1</span>-&gt;<span class="fn">to</span>();<br/>
+<span class="in1"></span>}<br/>
+<span class="in1"></span><span class="keyword">if</span> (<span class="var">r2</span> != <span class="var">rn2</span>.<span class="fn">end</span>()) {<br/>
+<span class="in2"></span><span class="var">f2</span> = <span class="var">r2</span>-&gt;<span class="fn">from</span>();<br/>
+<span class="in2"></span><span class="var">t2</span> = <span class="var">r2</span>-&gt;<span class="fn">to</span>();<br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">compare</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">11</div>
+<code>
+<span class="macro">@add(<span class="name">compare</span>)</span><br/>
+<span class="in1"></span><span class="keyword">while</span> (<br/>
+<span class="in2"></span><span class="var">r1</span> != <span class="var">rn1</span>.<span class="fn">end</span>() &amp;&amp;<br/>
+<span class="in2"></span><span class="var">r2</span> != <span class="var">rn2</span>.<span class="fn">end</span>()<br/>
+<span class="in1"></span>) {<br/>
+<span class="in2"></span><span class="macro">@put(<span class="name">single compare</span>)</span>;<br/>
+<span class="in1"></span>}<br/>
+<span class="in1"></span><span class="keyword">return</span> <span class="num">0</span>;<br/>
+<span class="macro">@end(<span class="name">compare</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">12</div>
+<code>
+<span class="macro">@def(<span class="name">single compare</span>)</span><br/>
+<span class="in1"></span><span class="keyword">if</span> (<span class="var">f1</span> &gt; <span class="var">t1</span> || <span class="var">f1</span> &gt; <span class="var">en1</span>.<span class="fn">columns</span>()) {<br/>
+<span class="in2"></span>++<span class="var">r1</span>;<br/>
+<span class="in2"></span><span class="keyword">if</span> (<span class="var">r1</span> != <span class="var">rn1</span>.<span class="fn">end</span>()) {<br/>
+<span class="in3"></span><span class="var">f1</span> = <span class="var">r1</span>-&gt;<span class="fn">from</span>();<br/>
+<span class="in3"></span><span class="var">t1</span> = <span class="var">r1</span>-&gt;<span class="fn">to</span>();<br/>
+<span class="in2"></span>}<br/>
+<span class="in2"></span><span class="keyword">continue</span>;<br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">single compare</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">13</div>
+<code>
+<span class="macro">@add(<span class="name">single compare</span>)</span><br/>
+<span class="in1"></span><span class="keyword">if</span> (<span class="var">f2</span> &gt; <span class="var">t2</span> || <span class="var">f2</span> &gt; <span class="var">en2</span>.<span class="fn">columns</span>()) {<br/>
+<span class="in2"></span>++<span class="var">r2</span>;<br/>
+<span class="in2"></span><span class="keyword">if</span> (<span class="var">r2</span> != <span class="var">rn2</span>.<span class="fn">end</span>()) {<br/>
+<span class="in3"></span><span class="var">f2</span> = <span class="var">r2</span>-&gt;<span class="fn">from</span>();<br/>
+<span class="in3"></span><span class="var">t2</span> = <span class="var">r2</span>-&gt;<span class="fn">to</span>();<br/>
+<span class="in2"></span>}<br/>
+<span class="in2"></span><span class="keyword">continue</span>;<br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">single compare</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">14</div>
+<code>
+<span class="macro">@add(<span class="name">single compare</span>)</span><br/>
+<span class="in1"></span><span class="keyword">if</span> (<span class="var">en1</span>[<span class="var">f1</span>] &lt; <span class="var">en2</span>[<span class="var">f2</span>]) {<br/>
+<span class="in2"></span><span class="keyword">return</span> -<span class="num">1</span>;<br/>
+<span class="in1"></span>}<br/>
+<span class="in1"></span><span class="keyword">if</span> (<span class="var">en1</span>[<span class="var">f1</span>] &gt; <span class="var">en2</span>[<span class="var">f2</span>]) {<br/>
+<span class="in2"></span><span class="keyword">return</span> <span class="num">1</span>;<br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">single compare</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">15</div>
+<code>
+<span class="macro">@add(<span class="name">single compare</span>)</span><br/>
+<span class="in1"></span>++<span class="var">f1</span>; ++<span class="var">f2</span>;<br/>
+<span class="macro">@end(<span class="name">single compare</span>)</span><br/>
+</code></div>
+</div>
+</body>
+</html>

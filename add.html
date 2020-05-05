@@ -57,15 +57,7 @@
 <span class="in2"></span><span class="type">const</span> <span class="type">Entries</span> &amp;<span class="var">entries</span>,<br/>
 <span class="in2"></span><span class="type">const</span> <span class="type">char</span> **<span class="var">argv</span>, <span class="type">int</span> <span class="var">argc</span><br/>
 <span class="in1"></span>) {<br/>
-<span class="in2"></span><span class="type">bool</span> <span class="var">first</span> { <span class="num">true</span> };<br/>
-<span class="in2"></span><span class="keyword">for</span> (<span class="type">int</span> <span class="var">i</span> { <span class="num">1</span> }; <span class="var">i</span> &lt;= <span class="var">entries</span>.<span class="fn">columns</span>(); ++<span class="var">i</span>) {<br/>
-<span class="in3"></span><span class="keyword">if</span> (<span class="var">first</span>) { <br/>
-<span class="in4"></span><span class="var">first</span> = <span class="num">false</span>;<br/>
-<span class="in3"></span>} <span class="keyword">else</span> {<br/>
-<span class="in4"></span><span class="type">std</span>::<span class="var">cout</span> &lt;&lt; <span class="str">','</span>;<br/>
-<span class="in3"></span>}<br/>
-<span class="in3"></span><span class="type">std</span>::<span class="var">cout</span> &lt;&lt; <span class="type">Entries</span>::<span class="fn">escape</span>(<span class="var">entries</span>[<span class="var">i</span>]);<br/>
-<span class="in2"></span>}<br/>
+<span class="in2"></span><span class="type">bool</span> <span class="var">first</span> { <span class="var">entries</span>.<span class="fn">write</span>(<span class="num">true</span>, <span class="num">false</span>) };<br/>
 <span class="in2"></span><span class="keyword">for</span> (<span class="type">int</span> <span class="var">i</span> { <span class="num">0</span> }; <span class="var">i</span> &lt; <span class="var">argc</span>; ++<span class="var">i</span>) {<br/>
 <span class="in3"></span><span class="type">std</span>::<span class="type">string</span> <span class="var">v</span> { <span class="var">argv</span>[<span class="var">i</span>] };<br/>
 <span class="in3"></span><span class="keyword">for</span> (<span class="type">int</span> <span class="var">j</span> { <span class="num">1</span> }; <span class="var">j</span> &lt;= <span class="var">entries</span>.<span class="fn">columns</span>(); ++<span class="var">j</span>) {<br/>

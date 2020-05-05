@@ -24,7 +24,6 @@
 	#include "libs/file.h"
 	#include "libs/ranges.h"
 	#include <iostream>
-	#include <string>
 @end(globals)
 ```
 
@@ -38,39 +37,10 @@
 ```
 
 ```
-@add(globals)
-	void write_line(
-		const File &f, const Ranges &rngs,
-		const Entries &entries
-	) {
-		bool first { true };
-		for (const auto &r : rngs) {
-			if (r.from() > entries.columns()) {
-				std::cerr << "not enough columns in data\n";
-			}
-			for (int i { r.from() };
-				i <= r.to() &&
-					i <= entries.columns();
-				++i
-			) {
-				if (first) { 
-					first = false;
-				} else {
-					std::cout << ',';
-				}
-				std::cout << Entries::escape(entries[i]);
-			}
-		}
-		std::cout << "\r\n";
-	}
-@end(globals)
-```
-
-```
 @add(main)
-	write_line(in, rngs, in.header());
+	in.header().write(rngs);
 	while (in.next_line()) {
-		write_line(in, rngs, in.entries());
+		in.entries().write(rngs);
 	}
 @end(main)
 ```

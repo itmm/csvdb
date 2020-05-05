@@ -20,7 +20,12 @@
 ```
 
 ```
+@inc(cmp.md)
+```
+
+```
 @def(globals)
+	#include "libs/cmp.h"
 	#include "libs/file.h"
 	#include "libs/ranges.h"
 	#include <iostream>
@@ -40,55 +45,29 @@
 
 ```
 @add(globals)
-	void write_line(
-		const Entries &entries
-	) {
-		bool first { true };
-		for (int i { 1 }; i <= entries.columns(); ++i) {
-			if (first) { 
-				first = false;
-			} else {
-				std::cout << ',';
-			}
-			std::cout << Entries::escape(entries[i]);
-		}
-		std::cout << "\r\n";
-	}
-@end(globals)
-```
-
-```
-@add(globals)
 	#include <algorithm>
 @end(globals)
 ```
 
 ```
 @add(main)
-	write_line(in.header());
+	in.header().write();
 	std::vector<Entries> data;
 	while (in.next_line()) {
 		data.push_back(in.entries());
 	}
-	std::sort(data.begin(), data.end(), [&](const Entries &a, const Entries &b) -> bool {
-		for (const auto &r : rngs) {
-			for (int i { r.from() };
-				i <= r.to() &&
-					i <= in.columns();
-				++i
-			) {
-				if (a[i] < b[i]) {
-					return true;
-				}
-				if (a[i] > b[i]) {
-					return false;
-				}
-			}
+	std::sort(data.begin(), data.end(),
+		[&](
+			const Entries &a,
+			const Entries &b
+		) -> bool {
+			return compare(
+				a, rngs, b, rngs
+			) < 0;
 		}
-		return false;
-	});
+	);
 	for (const Entries &e : data) {
-		write_line(e);
+		e.write();
 	}
 @end(main)
 ```

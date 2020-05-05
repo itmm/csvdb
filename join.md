@@ -12,6 +12,10 @@
 ```
 
 ```
+@inc(cmp.md)
+```
+
+```
 @inc(ranges.md)
 ```
 
@@ -21,6 +25,7 @@
 
 ```
 @def(globals)
+	#include "libs/cmp.h"
 	#include "libs/file.h"
 	#include "libs/ranges.h"
 	#include <fstream>
@@ -54,24 +59,8 @@
 		const Entries &entries1,
 		const Entries &entries2
 	) {
-		bool first { true };
-		for (int i { 1 }; i <= entries1.columns(); ++i) {
-			if (first) { 
-				first = false;
-			} else {
-				std::cout << ',';
-			}
-			std::cout << Entries::escape(entries1[i]);
-		}
-		for (int i { 1 }; i <= entries2.columns(); ++i) {
-			if (first) { 
-				first = false;
-			} else {
-				std::cout << ',';
-			}
-			std::cout << Entries::escape(entries2[i]);
-		}
-		std::cout << "\r\n";
+		bool first { entries1.write(true, false) };
+		entries2.write(first, true);
 	}
 @end(globals)
 ```
@@ -84,43 +73,7 @@
 	Entries empty1; empty1.empty(in1.columns());
 	Entries empty2; empty2.empty(in2.columns());
 	while (has1 && has2) {
-		int sort { 0 };
-		auto rng1 { rngs1.begin() };
-		auto rng2 { rngs2.begin() };
-		if (rng1 != rngs1.end() && rng2 != rngs2.end()) {
-			int from1 { rng1->from() };
-			int to1 { rng1->to() };
-			int from2 { rng2->from() };
-			int to2 { rng2->to() };
-			while (rng1 != rngs1.end() && rng2 != rngs2.end()) {
-				if (from1 > to1 || from1 > empty1.columns()) {
-					++rng1;
-					if (rng1 != rngs1.end()) {
-						from1 = rng1->from();
-						to1 = rng1->to();
-					}
-					continue;
-				}
-				if (from2 > to2 || from2 > empty2.columns()) {
-					++rng2;
-					if (rng2 != rngs2.end()) {
-						from2 = rng2->from();
-						to2 = rng2->to();
-					}
-					continue;
-				}
-				if (in1.entries()[from1] < in2.entries()[from2]) {
-					sort = -1;
-					break;
-				}
-				if (in1.entries()[from1] > in2.entries()[from2]) {
-					sort = 1;
-					break;
-				}
-				++from1;
-				++from2;
-			}
-		}
+		int sort { compare(in1.entries(), rngs1, in2.entries(), rngs2) };
 		if (sort < 0) {
 			write_line(in1.entries(), empty2);
 			has1 = in1.next_line();
