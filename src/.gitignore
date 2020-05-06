@@ -4,3 +4,4 @@ cd-join
 cd-sort
 *.o
 .deps/
+.dirstamp

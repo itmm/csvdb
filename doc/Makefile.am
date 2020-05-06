@@ -9,6 +9,7 @@ doc_DATA = add.html \
 	entries.md \
 	file.html \
 	file.md \
+	hx_run \
 	index.html \
 	index.md \
 	join.html \
@@ -20,3 +21,16 @@ doc_DATA = add.html \
 	sort.html \
 	sort.md \
 	TODOs.md
+
+hx_run: add.md \
+	cmp.md \
+	cut.md \
+	entries.md \
+	file.md \
+	index.md \
+	join.md \
+	ranges.md \
+	sort.md
+	cd $(srcdir) && hx
+	date >$(srcdir)/$@
+
