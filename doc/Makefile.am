@@ -9,7 +9,6 @@ doc_DATA = add.html \
 	entries.md \
 	file.html \
 	file.md \
-	hx-run \
 	index.html \
 	index.md \
 	join.html \
