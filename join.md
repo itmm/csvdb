@@ -73,7 +73,7 @@
 	Entries empty1; empty1.empty(in1.columns());
 	Entries empty2; empty2.empty(in2.columns());
 	while (has1 && has2) {
-		int sort { compare(in1.entries(), rngs1, in2.entries(), rngs2) };
+		int sort { compare(in1.entries(), rngs1, in1.header(), in2.entries(), rngs2, in2.header()) };
 		if (sort < 0) {
 			write_line(in1.entries(), empty2);
 			has1 = in1.next_line();

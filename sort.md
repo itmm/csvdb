@@ -62,7 +62,8 @@
 			const Entries &b
 		) -> bool {
 			return compare(
-				a, rngs, b, rngs
+				a, rngs, in.header(),
+				b, rngs, in.header()
 			) < 0;
 		}
 	);

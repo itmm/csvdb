@@ -37,11 +37,14 @@
 
 ```
 @def(globals)
+	@put(needed by compare)
 	int compare(
 		const Entries &en1,
 		const Ranges &rn1,
+		const Entries &header1,
 		const Entries &en2,
-		const Ranges &rn2
+		const Ranges &rn2,
+		const Entries &header2
 	)
 	#if cmp_IMPL
 		{
@@ -114,14 +117,57 @@
 ```
 
 ```
+@def(needed by compare)
+	#if cmp_IMPL
+		static bool is_numeric(
+			const std::string &hd
+		) {
+			return hd.size() && hd[hd.size() - 1] == '#';
+		}
+	#endif
+@end(needed by compare)
+```
+
+```
 @add(single compare)
+	if (is_numeric(header1[f1]) && is_numeric(header2[f2])) {
+		@put(numeric compare);
+	} else {
+		@put(string compare);
+	}
+@end(single compare)
+```
+
+```
+@def(string compare)
 	if (en1[f1] < en2[f2]) {
 		return -1;
 	}
 	if (en1[f1] > en2[f2]) {
 		return 1;
 	}
-@end(single compare)
+@end(string compare)
+```
+
+```
+@def(numeric compare)
+	auto n1 { en1[f1] };
+	auto n2 { en2[f2] };
+	if (! n1.empty() && ! n2.empty()) {
+		double d1 { std::stod(n1) };
+		double d2 { std::stod(n2) };
+		if (d1 < d2) {
+			return -1;
+		}
+		if (d1 > d2) {
+			return 1;
+		}
+	} else if (! n1.empty()) {
+		return 1;
+	} else if (! n2.empty()) {
+		return -1;
+	}
+@end(numeric compare)
 ```
 
 ```

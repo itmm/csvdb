@@ -1,4 +1,3 @@
-* compare numerical
 * generate fields with expressions
 * select
 * aggregates
@@ -8,4 +7,7 @@
 * combine multiple files
 * rename headers
 * combine in one executable
+* man-pages
+* unix compatible
+* automake/autoconf
 
