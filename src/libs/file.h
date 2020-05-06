@@ -17,7 +17,7 @@
 	#include <string>
 
 #line 13 "file.md"
-;
+
 	class File {
 		private:
 			
@@ -31,7 +31,7 @@
 	std::istream &in_;
 
 #line 16 "file.md"
-;
+
 		public:
 			
 #line 27 "file.md"
@@ -67,7 +67,7 @@
 	}
 
 #line 18 "file.md"
-;
+
 	};
 	#if file_IMPL
 		
@@ -80,9 +80,9 @@
 	return entries_.parse(in_);
 
 #line 35 "file.md"
-;
+
 	}
 
 #line 21 "file.md"
-;
+
 	#endif

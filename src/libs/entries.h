@@ -14,7 +14,7 @@
 	#include <iostream>
 
 #line 13 "entries.md"
-;
+
 	#include <vector>
 	class Range;
 	using Ranges = std::vector<Range>;
@@ -30,7 +30,7 @@
 	static std::string empty_;
 
 #line 19 "entries.md"
-;
+
 		public:
 			
 #line 36 "entries.md"
@@ -62,7 +62,7 @@
 	}
 
 #line 176 "entries.md"
-;
+
 		return empty_;
 	}
 
@@ -78,7 +78,7 @@
 	bool write(bool first = true, bool with_eol = true) const;
 
 #line 21 "entries.md"
-;
+
 	};
 	#if entries_IMPL
 		
@@ -139,7 +139,7 @@
 	}
 
 #line 56 "entries.md"
-;
+
 	}
 
 #line 128 "entries.md"
@@ -201,5 +201,5 @@
 	}
 
 #line 24 "entries.md"
-;
+
 	#endif

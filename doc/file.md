@@ -10,15 +10,15 @@
 ```
 @Def(file: ../src/libs/file.h)
 	#pragma once
-	@put(includes);
+	@put(includes)
 	class File {
 		private:
-			@put(privates);
+			@put(privates)
 		public:
-			@put(publics);
+			@put(publics)
 	};
 	#if file_IMPL
-		@put(impl);
+		@put(impl)
 	#endif
 @End(file: ../src/libs/file.h)
 ```
@@ -32,7 +32,7 @@
 ```
 @def(impl)
 	bool File::next_line() {
-		@put(next line);
+		@put(next line)
 	}
 @end(impl)
 ```

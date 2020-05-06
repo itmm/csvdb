@@ -2,11 +2,11 @@
 
 ```
 @Def(file: ../src/cd-cut.cpp)
-	@put(globals);
+	@put(globals)
 	int main(
 		int argc, const char *argv[]
 	) {
-		@put(main);
+		@put(main)
 	}
 @End(file: ../src/cd-cut.cpp)
 ```

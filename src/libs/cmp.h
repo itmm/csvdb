@@ -43,9 +43,9 @@
 #line 60 "cmp.md"
 
 	auto r1 { rn1.begin() };
-	int f1, t1;
+	int f1 { 1 }, t1 { 0 };
 	auto r2 { rn2.begin() };
-	int f2, t2;
+	int f2 { 2 }, t2 { 0 };
 
 #line 69 "cmp.md"
 

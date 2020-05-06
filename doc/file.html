@@ -24,15 +24,15 @@
 <code>
 <span class="macro">@Def(<span class="name">file: ../src/libs/file.h</span>)</span><br/>
 <span class="in1"></span><span class="keyword">#pragma</span> <span class="keyword">once</span><br/>
-<span class="in1"></span><span class="macro">@put(<span class="name">includes</span>)</span>;<br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">includes</span>)</span><br/>
 <span class="in1"></span><span class="keyword">class</span> <span class="type">File</span> {<br/>
 <span class="in2"></span><span class="keyword">private</span>:<br/>
-<span class="in3"></span><span class="macro">@put(<span class="name">privates</span>)</span>;<br/>
+<span class="in3"></span><span class="macro">@put(<span class="name">privates</span>)</span><br/>
 <span class="in2"></span><span class="keyword">public</span>:<br/>
-<span class="in3"></span><span class="macro">@put(<span class="name">publics</span>)</span>;<br/>
+<span class="in3"></span><span class="macro">@put(<span class="name">publics</span>)</span><br/>
 <span class="in1"></span>};<br/>
 <span class="in1"></span><span class="keyword">#if</span> <span class="var">file_IMPL</span><br/>
-<span class="in2"></span><span class="macro">@put(<span class="name">impl</span>)</span>;<br/>
+<span class="in2"></span><span class="macro">@put(<span class="name">impl</span>)</span><br/>
 <span class="in1"></span><span class="keyword">#endif</span><br/>
 <span class="macro">@End(<span class="name">file: ../src/libs/file.h</span>)</span><br/>
 </code></div>
@@ -48,7 +48,7 @@
 <code>
 <span class="macro">@def(<span class="name">impl</span>)</span><br/>
 <span class="in1"></span><span class="type">bool</span> <span class="type">File</span>::<span class="fn">next_line</span>() {<br/>
-<span class="in2"></span><span class="macro">@put(<span class="name">next line</span>)</span>;<br/>
+<span class="in2"></span><span class="macro">@put(<span class="name">next line</span>)</span><br/>
 <span class="in1"></span>}<br/>
 <span class="macro">@end(<span class="name">impl</span>)</span><br/>
 </code></div>

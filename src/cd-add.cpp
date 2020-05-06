@@ -36,7 +36,7 @@
 	}
 
 #line 5 "add.md"
-;
+
 	int main(
 		int argc, const char *argv[]
 	) {
@@ -53,5 +53,5 @@
 	}
 
 #line 9 "add.md"
-;
+
 	}

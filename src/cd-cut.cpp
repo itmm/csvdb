@@ -9,7 +9,7 @@
 	#include <iostream>
 
 #line 5 "cut.md"
-;
+
 	int main(
 		int argc, const char *argv[]
 	) {
@@ -29,5 +29,5 @@
 	}
 
 #line 9 "cut.md"
-;
+
 	}

@@ -10,18 +10,18 @@
 ```
 @Def(file: ../src/libs/entries.h)
 	#pragma once
-	@put(includes);
+	@put(includes)
 	#include <vector>
 	class Range;
 	using Ranges = std::vector<Range>;
 	class Entries {
 		private:
-			@put(privates);
+			@put(privates)
 		public:
-			@put(publics);
+			@put(publics)
 	};
 	#if entries_IMPL
-		@put(impl);
+		@put(impl)
 	#endif
 @End(file: ../src/libs/entries.h)
 ```
@@ -53,7 +53,7 @@
 	bool Entries::parse(
 		std::istream &in
 	) {
-		@put(parse);
+		@put(parse)
 	}
 @end(impl)
 ```
@@ -173,7 +173,7 @@
 	const std::string &operator[](
 		int i
 	) const {
-		@put(get);
+		@put(get)
 		return empty_;
 	}
 @end(publics)
