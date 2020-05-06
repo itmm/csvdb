@@ -1,0 +1,16 @@
+.TH CD-CUT 1
+.SH NAME
+cd-cut \- extract columns from a CSV file
+.SH SYNOPSIS
+.B cd-cut
+[\fIRANGES\fR ...]
+.SH DESCRIPTION
+.B cd-cut
+reads a CSV file from standard input.
+This file must conform to
+"RFC 4180 Common Format and MIME Type for Comma-Separated Values (CSV) Files".
+.LP
+.BR \fIRANGES\fR
+Specify the columns to return.
+If no ranges are specified, the whole file is copied.
+

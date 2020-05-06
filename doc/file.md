@@ -1,14 +1,14 @@
 # Handling files
 
 ```
-@Def(file: libs/file.cpp)
+@Def(file: ../src/libs/file.cpp)
 	#define file_IMPL 1
 	#include "file.h"
-@End(file: libs/file.cpp)
+@End(file: ../src/libs/file.cpp)
 ```
 
 ```
-@Def(file: libs/file.h)
+@Def(file: ../src/libs/file.h)
 	#pragma once
 	@put(includes);
 	class File {
@@ -20,7 +20,7 @@
 	#if file_IMPL
 		@put(impl);
 	#endif
-@End(file: libs/file.h)
+@End(file: ../src/libs/file.h)
 ```
 
 ```

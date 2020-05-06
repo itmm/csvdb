@@ -7,7 +7,4 @@
 * combine multiple files
 * rename headers
 * combine in one executable
-* man-pages
-* unix compatible
-* automake/autoconf
 

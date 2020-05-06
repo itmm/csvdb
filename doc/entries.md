@@ -1,14 +1,14 @@
 # Handling files
 
 ```
-@Def(file: libs/entries.cpp)
+@Def(file: ../src/libs/entries.cpp)
 	#define entries_IMPL 1
 	#include "entries.h"
-@End(file: libs/entries.cpp)
+@End(file: ../src/libs/entries.cpp)
 ```
 
 ```
-@Def(file: libs/entries.h)
+@Def(file: ../src/libs/entries.h)
 	#pragma once
 	@put(includes);
 	#include <vector>
@@ -23,7 +23,7 @@
 	#if entries_IMPL
 		@put(impl);
 	#endif
-@End(file: libs/entries.h)
+@End(file: ../src/libs/entries.h)
 ```
 
 ```

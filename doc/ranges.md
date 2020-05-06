@@ -1,10 +1,10 @@
 # Ranges
 
 ```
-@Def(file: libs/ranges.cpp)
+@Def(file: ../src/libs/ranges.cpp)
 	#define ranges_IMPL 1
 	#include "ranges.h"
-@End(file: libs/ranges.cpp)
+@End(file: ../src/libs/ranges.cpp)
 ```
 
 ```
@@ -12,7 +12,7 @@
 ```
 
 ```
-@Def(file: libs/ranges.h)
+@Def(file: ../src/libs/ranges.h)
 	#pragma once
 
 	#include "file.h"
@@ -82,7 +82,7 @@
 	#else
 		;
 	#endif
-@End(file: libs/ranges.h)
+@End(file: ../src/libs/ranges.h)
 ```
 
 ```

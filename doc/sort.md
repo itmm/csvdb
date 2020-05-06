@@ -1,14 +1,14 @@
 # Sorting rows
 
 ```
-@Def(file: cd-sort.cpp)
+@Def(file: ../src/cd-sort.cpp)
 	@put(globals);
 	int main(
 		int argc, const char *argv[]
 	) {
 		@put(main);
 	}
-@End(file: cd-sort.cpp)
+@End(file: ../src/cd-sort.cpp)
 ```
 
 ```

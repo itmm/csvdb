@@ -1,5 +1,6 @@
-cd-add
-cd-cut
-cd-join
-cd-sort
-*.o
+autom4te.cache
+config.log
+config.status
+depcomp
+install-sh
+missing

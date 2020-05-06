@@ -1,14 +1,14 @@
 # Projecting Columns
 
 ```
-@Def(file: cd-add.cpp)
+@Def(file: ../src/cd-add.cpp)
 	@put(globals);
 	int main(
 		int argc, const char *argv[]
 	) {
 		@put(main);
 	}
-@End(file: cd-add.cpp)
+@End(file: ../src/cd-add.cpp)
 ```
 
 ```

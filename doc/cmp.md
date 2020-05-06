@@ -1,18 +1,18 @@
 # Comparing entries
 
 ```
-@Def(file: libs/cmp.h)
+@Def(file: ../src/libs/cmp.h)
 	#pragma once
 	@put(includes)
 	@put(globals)
-@End(file: libs/cmp.h)
+@End(file: ../src/libs/cmp.h)
 ```
 
 ```
-@Def(file: libs/cmp.cpp)
+@Def(file: ../src/libs/cmp.cpp)
 	#define cmp_IMPL 1
 	#include "cmp.h"
-@End(file: libs/cmp.cpp)
+@End(file: ../src/libs/cmp.cpp)
 ```
 
 ```
