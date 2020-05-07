@@ -108,12 +108,12 @@ am_cd_cut_OBJECTS = cd-cut.$(OBJEXT) libs/file.$(OBJEXT) \
 	libs/entries.$(OBJEXT) libs/ranges.$(OBJEXT)
 cd_cut_OBJECTS = $(am_cd_cut_OBJECTS)
 cd_cut_LDADD = $(LDADD)
-am_cd_join_OBJECTS = cd-cut.$(OBJEXT) libs/file.$(OBJEXT) \
+am_cd_join_OBJECTS = cd-join.$(OBJEXT) libs/file.$(OBJEXT) \
 	libs/entries.$(OBJEXT) libs/ranges.$(OBJEXT) \
 	libs/cmp.$(OBJEXT)
 cd_join_OBJECTS = $(am_cd_join_OBJECTS)
 cd_join_LDADD = $(LDADD)
-am_cd_sort_OBJECTS = cd-cut.$(OBJEXT) libs/file.$(OBJEXT) \
+am_cd_sort_OBJECTS = cd-sort.$(OBJEXT) libs/file.$(OBJEXT) \
 	libs/entries.$(OBJEXT) libs/ranges.$(OBJEXT) \
 	libs/cmp.$(OBJEXT)
 cd_sort_OBJECTS = $(am_cd_sort_OBJECTS)
@@ -134,6 +134,7 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/cd-add.Po ./$(DEPDIR)/cd-cut.Po \
+	./$(DEPDIR)/cd-join.Po ./$(DEPDIR)/cd-sort.Po \
 	libs/$(DEPDIR)/cmp.Po libs/$(DEPDIR)/entries.Po \
 	libs/$(DEPDIR)/file.Po libs/$(DEPDIR)/ranges.Po
 am__mv = mv -f
@@ -283,9 +284,9 @@ cd_add_SOURCES = cd-add.cpp libs/file.cpp libs/file.h libs/entries.cpp libs/entr
 cd_add_DEPENDENCIES = $(srcdir)/../doc/hx_run
 cd_cut_SOURCES = cd-cut.cpp libs/file.cpp libs/file.h libs/entries.cpp libs/entries.h libs/ranges.cpp libs/ranges.h
 cd_cut_DEPENDENCIES = $(srcdir)/../doc/hx_run
-cd_join_SOURCES = cd-cut.cpp libs/file.cpp libs/file.h libs/entries.cpp libs/entries.h libs/ranges.cpp libs/ranges.h libs/cmp.cpp libs/cmp.h
+cd_join_SOURCES = cd-join.cpp libs/file.cpp libs/file.h libs/entries.cpp libs/entries.h libs/ranges.cpp libs/ranges.h libs/cmp.cpp libs/cmp.h
 cd_join_DEPENDENCIES = $(srcdir)/../doc/hx_run
-cd_sort_SOURCES = cd-cut.cpp libs/file.cpp libs/file.h libs/entries.cpp libs/entries.h libs/ranges.cpp libs/ranges.h libs/cmp.cpp libs/cmp.h
+cd_sort_SOURCES = cd-sort.cpp libs/file.cpp libs/file.h libs/entries.cpp libs/entries.h libs/ranges.cpp libs/ranges.h libs/cmp.cpp libs/cmp.h
 cd_sort_DEPENDENCIES = $(srcdir)/../doc/hx_run
 all: all-am
 
@@ -300,9 +301,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign src/Makefile
+	  $(AUTOMAKE) --gnu src/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -402,6 +403,8 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cd-add.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cd-cut.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cd-join.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cd-sort.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@libs/$(DEPDIR)/cmp.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@libs/$(DEPDIR)/entries.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@libs/$(DEPDIR)/file.Po@am__quote@ # am--include-marker
@@ -560,6 +563,8 @@ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 distclean: distclean-am
 		-rm -f ./$(DEPDIR)/cd-add.Po
 	-rm -f ./$(DEPDIR)/cd-cut.Po
+	-rm -f ./$(DEPDIR)/cd-join.Po
+	-rm -f ./$(DEPDIR)/cd-sort.Po
 	-rm -f libs/$(DEPDIR)/cmp.Po
 	-rm -f libs/$(DEPDIR)/entries.Po
 	-rm -f libs/$(DEPDIR)/file.Po
@@ -611,6 +616,8 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/cd-add.Po
 	-rm -f ./$(DEPDIR)/cd-cut.Po
+	-rm -f ./$(DEPDIR)/cd-join.Po
+	-rm -f ./$(DEPDIR)/cd-sort.Po
 	-rm -f libs/$(DEPDIR)/cmp.Po
 	-rm -f libs/$(DEPDIR)/entries.Po
 	-rm -f libs/$(DEPDIR)/file.Po

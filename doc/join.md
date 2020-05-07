@@ -2,11 +2,11 @@
 
 ```
 @Def(file: ../src/cd-join.cpp)
-	@put(globals);
+	@put(globals)
 	int main(
 		int argc, const char *argv[]
 	) {
-		@put(main);
+		@put(main)
 	}
 @End(file: ../src/cd-join.cpp)
 ```
@@ -66,6 +66,23 @@
 ```
 
 ```
+@add(globals)
+	bool check_next_line(
+		File &f, const Ranges &rngs
+	) {
+		Entries old { f.entries() };
+		if (! f.next_line()) {
+			return false;
+		}
+		if (compare(old, rngs, f.header(), f.entries(), rngs, f.header()) > 0) {
+			std::cerr << "join file not sorted\n";
+		}
+		return true;
+	}
+@end(globals)
+```
+
+```
 @add(main)
 	write_line(in1.header(), in2.header());
 	bool has1 { in1.next_line() };
@@ -76,23 +93,23 @@
 		int sort { compare(in1.entries(), rngs1, in1.header(), in2.entries(), rngs2, in2.header()) };
 		if (sort < 0) {
 			write_line(in1.entries(), empty2);
-			has1 = in1.next_line();
+			has1 = check_next_line(in1, rngs1);
 		} else if (sort > 0) {
 			write_line(empty1, in2.entries());
-			has2 = in2.next_line();
+			has2 = check_next_line(in2, rngs2);
 		} else {
 			write_line(in1.entries(), in2.entries());
-			has1 = in1.next_line();
-			has2 = in2.next_line();
+			has1 = check_next_line(in1, rngs1);
+			has2 = check_next_line(in2, rngs2);
 		}
 	}
 	while (has1) {
 		write_line(in1.entries(), empty2);
-		has1 = in1.next_line();
+		has1 = check_next_line(in1, rngs1);
 	}
 	while (has2) {
 		write_line(empty1, in2.entries());
-		has2 = in2.next_line();
+		has2 = check_next_line(in2, rngs2);
 	}
 @end(main)
 ```

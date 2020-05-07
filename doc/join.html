@@ -15,11 +15,11 @@
 <div class="page"><div class="slide"><div class="slide-nr">2</div>
 <code>
 <span class="macro">@Def(<span class="name">file: ../src/cd-join.cpp</span>)</span><br/>
-<span class="in1"></span><span class="macro">@put(<span class="name">globals</span>)</span>;<br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">globals</span>)</span><br/>
 <span class="in1"></span><span class="type">int</span> <span class="fn">main</span>(<br/>
 <span class="in2"></span><span class="type">int</span> <span class="var">argc</span>, <span class="type">const</span> <span class="type">char</span> *<span class="var">argv</span>[]<br/>
 <span class="in1"></span>) {<br/>
-<span class="in2"></span><span class="macro">@put(<span class="name">main</span>)</span>;<br/>
+<span class="in2"></span><span class="macro">@put(<span class="name">main</span>)</span><br/>
 <span class="in1"></span>}<br/>
 <span class="macro">@End(<span class="name">file: ../src/cd-join.cpp</span>)</span><br/>
 </code></div>
@@ -86,6 +86,24 @@
 </div>
 <div class="page"><div class="slide"><div class="slide-nr">9</div>
 <code>
+<span class="macro">@add(<span class="name">globals</span>)</span><br/>
+<span class="in1"></span><span class="type">bool</span> <span class="fn">check_next_line</span>(<br/>
+<span class="in2"></span><span class="type">File</span> &amp;<span class="var">f</span>, <span class="type">const</span> <span class="type">Ranges</span> &amp;<span class="var">rngs</span><br/>
+<span class="in1"></span>) {<br/>
+<span class="in2"></span><span class="type">Entries</span> <span class="var">old</span> { <span class="var">f</span>.<span class="fn">entries</span>() };<br/>
+<span class="in2"></span><span class="keyword">if</span> (! <span class="var">f</span>.<span class="fn">next_line</span>()) {<br/>
+<span class="in3"></span><span class="keyword">return</span> <span class="num">false</span>;<br/>
+<span class="in2"></span>}<br/>
+<span class="in2"></span><span class="keyword">if</span> (<span class="fn">compare</span>(<span class="var">old</span>, <span class="var">rngs</span>, <span class="var">f</span>.<span class="fn">header</span>(), <span class="var">f</span>.<span class="fn">entries</span>(), <span class="var">rngs</span>, <span class="var">f</span>.<span class="fn">header</span>()) &gt; <span class="num">0</span>) {<br/>
+<span class="in3"></span><span class="type">std</span>::<span class="var">cerr</span> &lt;&lt; <span class="str">"join file not sorted\n"</span>;<br/>
+<span class="in2"></span>}<br/>
+<span class="in2"></span><span class="keyword">return</span> <span class="num">true</span>;<br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">globals</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">10</div>
+<code>
 <span class="macro">@add(<span class="name">main</span>)</span><br/>
 <span class="in1"></span><span class="fn">write_line</span>(<span class="var">in1</span>.<span class="fn">header</span>(), <span class="var">in2</span>.<span class="fn">header</span>());<br/>
 <span class="in1"></span><span class="type">bool</span> <span class="var">has1</span> { <span class="var">in1</span>.<span class="fn">next_line</span>() };<br/>
@@ -96,23 +114,23 @@
 <span class="in2"></span><span class="type">int</span> <span class="var">sort</span> { <span class="fn">compare</span>(<span class="var">in1</span>.<span class="fn">entries</span>(), <span class="var">rngs1</span>, <span class="var">in1</span>.<span class="fn">header</span>(), <span class="var">in2</span>.<span class="fn">entries</span>(), <span class="var">rngs2</span>, <span class="var">in2</span>.<span class="fn">header</span>()) };<br/>
 <span class="in2"></span><span class="keyword">if</span> (<span class="var">sort</span> &lt; <span class="num">0</span>) {<br/>
 <span class="in3"></span><span class="fn">write_line</span>(<span class="var">in1</span>.<span class="fn">entries</span>(), <span class="var">empty2</span>);<br/>
-<span class="in3"></span><span class="var">has1</span> = <span class="var">in1</span>.<span class="fn">next_line</span>();<br/>
+<span class="in3"></span><span class="var">has1</span> = <span class="fn">check_next_line</span>(<span class="var">in1</span>, <span class="var">rngs1</span>);<br/>
 <span class="in2"></span>} <span class="keyword">else</span> <span class="keyword">if</span> (<span class="var">sort</span> &gt; <span class="num">0</span>) {<br/>
 <span class="in3"></span><span class="fn">write_line</span>(<span class="var">empty1</span>, <span class="var">in2</span>.<span class="fn">entries</span>());<br/>
-<span class="in3"></span><span class="var">has2</span> = <span class="var">in2</span>.<span class="fn">next_line</span>();<br/>
+<span class="in3"></span><span class="var">has2</span> = <span class="fn">check_next_line</span>(<span class="var">in2</span>, <span class="var">rngs2</span>);<br/>
 <span class="in2"></span>} <span class="keyword">else</span> {<br/>
 <span class="in3"></span><span class="fn">write_line</span>(<span class="var">in1</span>.<span class="fn">entries</span>(), <span class="var">in2</span>.<span class="fn">entries</span>());<br/>
-<span class="in3"></span><span class="var">has1</span> = <span class="var">in1</span>.<span class="fn">next_line</span>();<br/>
-<span class="in3"></span><span class="var">has2</span> = <span class="var">in2</span>.<span class="fn">next_line</span>();<br/>
+<span class="in3"></span><span class="var">has1</span> = <span class="fn">check_next_line</span>(<span class="var">in1</span>, <span class="var">rngs1</span>);<br/>
+<span class="in3"></span><span class="var">has2</span> = <span class="fn">check_next_line</span>(<span class="var">in2</span>, <span class="var">rngs2</span>);<br/>
 <span class="in2"></span>}<br/>
 <span class="in1"></span>}<br/>
 <span class="in1"></span><span class="keyword">while</span> (<span class="var">has1</span>) {<br/>
 <span class="in2"></span><span class="fn">write_line</span>(<span class="var">in1</span>.<span class="fn">entries</span>(), <span class="var">empty2</span>);<br/>
-<span class="in2"></span><span class="var">has1</span> = <span class="var">in1</span>.<span class="fn">next_line</span>();<br/>
+<span class="in2"></span><span class="var">has1</span> = <span class="fn">check_next_line</span>(<span class="var">in1</span>, <span class="var">rngs1</span>);<br/>
 <span class="in1"></span>}<br/>
 <span class="in1"></span><span class="keyword">while</span> (<span class="var">has2</span>) {<br/>
 <span class="in2"></span><span class="fn">write_line</span>(<span class="var">empty1</span>, <span class="var">in2</span>.<span class="fn">entries</span>());<br/>
-<span class="in2"></span><span class="var">has2</span> = <span class="var">in2</span>.<span class="fn">next_line</span>();<br/>
+<span class="in2"></span><span class="var">has2</span> = <span class="fn">check_next_line</span>(<span class="var">in2</span>, <span class="var">rngs2</span>);<br/>
 <span class="in1"></span>}<br/>
 <span class="macro">@end(<span class="name">main</span>)</span><br/>
 </code></div>

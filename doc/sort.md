@@ -2,11 +2,11 @@
 
 ```
 @Def(file: ../src/cd-sort.cpp)
-	@put(globals);
+	@put(globals)
 	int main(
 		int argc, const char *argv[]
 	) {
-		@put(main);
+		@put(main)
 	}
 @End(file: ../src/cd-sort.cpp)
 ```

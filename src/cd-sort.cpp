@@ -16,7 +16,7 @@
 	#include <algorithm>
 
 #line 5 "sort.md"
-;
+
 	int main(
 		int argc, const char *argv[]
 	) {
@@ -51,5 +51,5 @@
 	}
 
 #line 9 "sort.md"
-;
+
 	}
