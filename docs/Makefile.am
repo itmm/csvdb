@@ -18,8 +18,6 @@ dist_doc_DATA = add.html \
 	ranges.md \
 	replace.html \
 	replace.md \
-	slides/bg.svg \
-	slides/slides.css \
 	sort.html \
 	sort.md \
 	TODOs.md

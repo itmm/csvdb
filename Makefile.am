@@ -1,5 +1,5 @@
 AUTOMAKE_OPTIONS = foreign
-SUBDIRS = docs src examples man
+SUBDIRS = docs docs/slides src examples man
 dist_doc_DATA = AUTHORS \
 	LICENSE \
 	README.md
