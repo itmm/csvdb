@@ -91,7 +91,8 @@ ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
+DIST_COMMON = $(srcdir)/Makefile.am $(dist_example_DATA) \
+	$(am__DIST_COMMON)
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
@@ -142,7 +143,7 @@ am__uninstall_files_from_dir = { \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
 am__installdirs = "$(DESTDIR)$(exampledir)"
-DATA = $(example_DATA)
+DATA = $(dist_example_DATA)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 am__DIST_COMMON = $(srcdir)/Makefile.in
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -232,7 +233,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 exampledir = $(datarootdir)/doc/@PACKAGE@
-example_DATA = elo.csv \
+dist_example_DATA = elo.csv \
 	test.csv
 
 all: all-am
@@ -267,9 +268,9 @@ $(top_srcdir)/configure:  $(am__configure_deps)
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
-install-exampleDATA: $(example_DATA)
+install-dist_exampleDATA: $(dist_example_DATA)
 	@$(NORMAL_INSTALL)
-	@list='$(example_DATA)'; test -n "$(exampledir)" || list=; \
+	@list='$(dist_example_DATA)'; test -n "$(exampledir)" || list=; \
 	if test -n "$$list"; then \
 	  echo " $(MKDIR_P) '$(DESTDIR)$(exampledir)'"; \
 	  $(MKDIR_P) "$(DESTDIR)$(exampledir)" || exit 1; \
@@ -283,9 +284,9 @@ install-exampleDATA: $(example_DATA)
 	  $(INSTALL_DATA) $$files "$(DESTDIR)$(exampledir)" || exit $$?; \
 	done
 
-uninstall-exampleDATA:
+uninstall-dist_exampleDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(example_DATA)'; test -n "$(exampledir)" || list=; \
+	@list='$(dist_example_DATA)'; test -n "$(exampledir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(exampledir)'; $(am__uninstall_files_from_dir)
 tags TAGS:
@@ -385,7 +386,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-exampleDATA
+install-data-am: install-dist_exampleDATA
 
 install-dvi: install-dvi-am
 
@@ -429,21 +430,21 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-exampleDATA
+uninstall-am: uninstall-dist_exampleDATA
 
 .MAKE: install-am install-strip
 
 .PHONY: all all-am check check-am clean clean-generic cscopelist-am \
 	ctags-am distclean distclean-generic distdir dvi dvi-am html \
 	html-am info info-am install install-am install-data \
-	install-data-am install-dvi install-dvi-am install-exampleDATA \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-man install-pdf \
-	install-pdf-am install-ps install-ps-am install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
-	pdf-am ps ps-am tags-am uninstall uninstall-am \
-	uninstall-exampleDATA
+	install-data-am install-dist_exampleDATA install-dvi \
+	install-dvi-am install-exec install-exec-am install-html \
+	install-html-am install-info install-info-am install-man \
+	install-pdf install-pdf-am install-ps install-ps-am \
+	install-strip installcheck installcheck-am installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-generic pdf pdf-am ps ps-am tags-am uninstall \
+	uninstall-am uninstall-dist_exampleDATA
 
 .PRECIOUS: Makefile
 

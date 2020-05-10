@@ -283,7 +283,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-AM_CXXFLAGS = --pedantic -Wall -std=c++17 -O2
+AM_CXXFLAGS = --pedantic -Wall -Werror -std=c++17 -O2
 AUTOMAKE_OPTIONS = subdir-objects
 csv_add_SOURCES = csv-add.cpp libs/file.cpp libs/file.h libs/entries.cpp libs/entries.h libs/ranges.cpp libs/ranges.h
 csv_add_DEPENDENCIES = $(srcdir)/../docs/hx_run

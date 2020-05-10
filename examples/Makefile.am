@@ -1,3 +1,3 @@
 exampledir = $(datarootdir)/doc/@PACKAGE@
-example_DATA = elo.csv \
+dist_example_DATA = elo.csv \
 	test.csv

@@ -1,5 +1,5 @@
 docdir = $(datadir)/doc/@PACKAGE@
-doc_DATA = add.html \
+dist_doc_DATA = add.html \
 	add.md \
 	cmp.html \
 	cmp.md \

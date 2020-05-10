@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.69)
-AC_INIT(csvdb, 0.1, timm@knp.de)
+AC_INIT(csvtools, 0.1, timm@knp.de)
 AC_CONFIG_SRCDIR(src/cd-join.cpp)
 #AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE

@@ -1,4 +1,4 @@
-AM_CXXFLAGS = --pedantic -Wall -std=c++17 -O2
+AM_CXXFLAGS = --pedantic -Wall -Werror -std=c++17 -O2
 
 AUTOMAKE_OPTIONS = subdir-objects
 
