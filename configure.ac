@@ -3,7 +3,7 @@
 
 AC_PREREQ(2.69)
 AC_INIT(csvtools, 0.1, timm@knp.de)
-AC_CONFIG_SRCDIR(src/cd-join.cpp)
+AC_CONFIG_SRCDIR(src/csv-join.cpp)
 #AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE
 
