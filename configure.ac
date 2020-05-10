@@ -27,4 +27,4 @@ AC_PROG_CXX
 #AC_CHECK_FUNCS([sqrt])
 
 #AC_CONFIG_FILES([slides/Makefile])
-AC_OUTPUT(Makefile src/Makefile doc/Makefile examples/Makefile man/Makefile)
+AC_OUTPUT(Makefile src/Makefile docs/Makefile examples/Makefile man/Makefile)

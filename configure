@@ -3124,7 +3124,7 @@ fi
 #AC_CHECK_FUNCS([sqrt])
 
 #AC_CONFIG_FILES([slides/Makefile])
-ac_config_files="$ac_config_files Makefile src/Makefile doc/Makefile examples/Makefile man/Makefile"
+ac_config_files="$ac_config_files Makefile src/Makefile docs/Makefile examples/Makefile man/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -3870,7 +3870,7 @@ do
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
-    "doc/Makefile") CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
+    "docs/Makefile") CONFIG_FILES="$CONFIG_FILES docs/Makefile" ;;
     "examples/Makefile") CONFIG_FILES="$CONFIG_FILES examples/Makefile" ;;
     "man/Makefile") CONFIG_FILES="$CONFIG_FILES man/Makefile" ;;
 

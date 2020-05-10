@@ -1,2 +1,3 @@
-# csvdb
-text base database functions
+# csvtools
+
+Utility programs to work with CSV files.

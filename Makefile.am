@@ -1,3 +1,3 @@
 AUTOMAKE_OPTIONS = foreign
-SUBDIRS = doc src examples man
+SUBDIRS = docs src examples man
 
