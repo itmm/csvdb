@@ -1,2 +1,2 @@
-man_MANS = cd-cut.1
+man_MANS = csv-cut.1
 

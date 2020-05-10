@@ -1,14 +1,14 @@
 # Joining tables
 
 ```
-@Def(file: ../src/cd-join.cpp)
+@Def(file: ../src/csv-join.cpp)
 	@put(globals)
 	int main(
 		int argc, const char *argv[]
 	) {
 		@put(main)
 	}
-@End(file: ../src/cd-join.cpp)
+@End(file: ../src/csv-join.cpp)
 ```
 
 ```

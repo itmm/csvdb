@@ -1,14 +1,14 @@
 # Projecting Columns
 
 ```
-@Def(file: ../src/cd-cut.cpp)
+@Def(file: ../src/csv-cut.cpp)
 	@put(globals)
 	int main(
 		int argc, const char *argv[]
 	) {
 		@put(main)
 	}
-@End(file: ../src/cd-cut.cpp)
+@End(file: ../src/csv-cut.cpp)
 ```
 
 ```
