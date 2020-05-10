@@ -197,13 +197,26 @@
 <span class="in1"></span><span class="type">const</span> <span class="type">std</span>::<span class="type">string</span> &amp;<span class="var">operator</span>[](<br/>
 <span class="in2"></span><span class="type">int</span> <span class="var">i</span><br/>
 <span class="in1"></span>) <span class="type">const</span> {<br/>
-<span class="in2"></span><span class="macro">@put(<span class="name">get</span>)</span><br/>
+<span class="in2"></span><span class="macro">@mul(<span class="name">get</span>)</span><br/>
 <span class="in2"></span><span class="keyword">return</span> <span class="var">empty_</span>;<br/>
 <span class="in1"></span>}<br/>
 <span class="macro">@end(<span class="name">publics</span>)</span><br/>
 </code></div>
 </div>
 <div class="page"><div class="slide"><div class="slide-nr">14</div>
+<code>
+<span class="macro">@add(<span class="name">publics</span>)</span><br/>
+<span class="in1"></span><span class="type">std</span>::<span class="type">string</span> &amp;<span class="var">operator</span>[](<br/>
+<span class="in2"></span><span class="type">int</span> <span class="var">i</span><br/>
+<span class="in1"></span>) {<br/>
+<span class="in2"></span><span class="macro">@mul(<span class="name">get</span>)</span><br/>
+<span class="in2"></span><span class="type">std</span>::<span class="var">cerr</span> &lt;&lt; <span class="str">"out of bounds write\n"</span>;<br/>
+<span class="in2"></span><span class="type">std</span>::<span class="fn">exit</span>(<span class="var">EXIT_FAILURE</span>);<br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">publics</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">15</div>
 <code>
 <span class="macro">@def(<span class="name">get</span>)</span><br/>
 <span class="in1"></span><span class="keyword">if</span> (<span class="var">i</span> &gt; <span class="num">0</span> &amp;&amp; <span class="var">i</span> &lt;= <span class="var">static_cast</span>&lt;<span class="type">int</span>&gt;(<br/>
@@ -214,7 +227,7 @@
 <span class="macro">@end(<span class="name">get</span>)</span><br/>
 </code></div>
 </div>
-<div class="page"><div class="slide"><div class="slide-nr">15</div>
+<div class="page"><div class="slide"><div class="slide-nr">16</div>
 <code>
 <span class="macro">@add(<span class="name">publics</span>)</span><br/>
 <span class="in1"></span><span class="type">int</span> <span class="fn">columns</span>() <span class="type">const</span> {<br/>
@@ -223,7 +236,7 @@
 <span class="macro">@end(<span class="name">publics</span>)</span><br/>
 </code></div>
 </div>
-<div class="page"><div class="slide"><div class="slide-nr">16</div>
+<div class="page"><div class="slide"><div class="slide-nr">17</div>
 <code>
 <span class="macro">@add(<span class="name">publics</span>)</span><br/>
 <span class="in1"></span><span class="type">bool</span> <span class="fn">write</span>(<span class="type">const</span> <span class="type">Ranges</span> &amp;<span class="var">rngs</span>, <span class="type">bool</span> <span class="var">first</span> = <span class="num">true</span>, <span class="type">bool</span> <span class="var">with_eol</span> = <span class="num">true</span>) <span class="type">const</span>;<br/>
@@ -231,7 +244,7 @@
 <span class="macro">@end(<span class="name">publics</span>)</span><br/>
 </code></div>
 </div>
-<div class="page"><div class="slide"><div class="slide-nr">17</div>
+<div class="page"><div class="slide"><div class="slide-nr">18</div>
 <code>
 <span class="macro">@add(<span class="name">impl</span>)</span><br/>
 <span class="in1"></span><span class="keyword">#include</span> <span class="str">"ranges.h"</span><br/>

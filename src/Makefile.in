@@ -87,7 +87,7 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 bin_PROGRAMS = csv-add$(EXEEXT) csv-cut$(EXEEXT) csv-join$(EXEEXT) \
-	csv-sort$(EXEEXT)
+	csv-replace$(EXEEXT) csv-sort$(EXEEXT)
 subdir = src
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -113,6 +113,10 @@ am_csv_join_OBJECTS = csv-join.$(OBJEXT) libs/file.$(OBJEXT) \
 	libs/cmp.$(OBJEXT)
 csv_join_OBJECTS = $(am_csv_join_OBJECTS)
 csv_join_LDADD = $(LDADD)
+am_csv_replace_OBJECTS = csv-replace.$(OBJEXT) libs/file.$(OBJEXT) \
+	libs/entries.$(OBJEXT) libs/ranges.$(OBJEXT)
+csv_replace_OBJECTS = $(am_csv_replace_OBJECTS)
+csv_replace_LDADD = $(LDADD)
 am_csv_sort_OBJECTS = csv-sort.$(OBJEXT) libs/file.$(OBJEXT) \
 	libs/entries.$(OBJEXT) libs/ranges.$(OBJEXT) \
 	libs/cmp.$(OBJEXT)
@@ -134,9 +138,10 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/csv-add.Po ./$(DEPDIR)/csv-cut.Po \
-	./$(DEPDIR)/csv-join.Po ./$(DEPDIR)/csv-sort.Po \
-	libs/$(DEPDIR)/cmp.Po libs/$(DEPDIR)/entries.Po \
-	libs/$(DEPDIR)/file.Po libs/$(DEPDIR)/ranges.Po
+	./$(DEPDIR)/csv-join.Po ./$(DEPDIR)/csv-replace.Po \
+	./$(DEPDIR)/csv-sort.Po libs/$(DEPDIR)/cmp.Po \
+	libs/$(DEPDIR)/entries.Po libs/$(DEPDIR)/file.Po \
+	libs/$(DEPDIR)/ranges.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -164,9 +169,9 @@ am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(csv_add_SOURCES) $(csv_cut_SOURCES) $(csv_join_SOURCES) \
-	$(csv_sort_SOURCES)
+	$(csv_replace_SOURCES) $(csv_sort_SOURCES)
 DIST_SOURCES = $(csv_add_SOURCES) $(csv_cut_SOURCES) \
-	$(csv_join_SOURCES) $(csv_sort_SOURCES)
+	$(csv_join_SOURCES) $(csv_replace_SOURCES) $(csv_sort_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -286,6 +291,8 @@ csv_cut_SOURCES = csv-cut.cpp libs/file.cpp libs/file.h libs/entries.cpp libs/en
 csv_cut_DEPENDENCIES = $(srcdir)/../docs/hx_run
 csv_join_SOURCES = csv-join.cpp libs/file.cpp libs/file.h libs/entries.cpp libs/entries.h libs/ranges.cpp libs/ranges.h libs/cmp.cpp libs/cmp.h
 csv_join_DEPENDENCIES = $(srcdir)/../docs/hx_run
+csv_replace_SOURCES = csv-replace.cpp libs/file.cpp libs/file.h libs/entries.cpp libs/entries.h libs/ranges.cpp libs/ranges.h
+csv_replace_DEPENDENCIES = $(srcdir)/../docs/hx_run
 csv_sort_SOURCES = csv-sort.cpp libs/file.cpp libs/file.h libs/entries.cpp libs/entries.h libs/ranges.cpp libs/ranges.h libs/cmp.cpp libs/cmp.h
 csv_sort_DEPENDENCIES = $(srcdir)/../docs/hx_run
 all: all-am
@@ -390,6 +397,10 @@ csv-join$(EXEEXT): $(csv_join_OBJECTS) $(csv_join_DEPENDENCIES) $(EXTRA_csv_join
 	@rm -f csv-join$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(csv_join_OBJECTS) $(csv_join_LDADD) $(LIBS)
 
+csv-replace$(EXEEXT): $(csv_replace_OBJECTS) $(csv_replace_DEPENDENCIES) $(EXTRA_csv_replace_DEPENDENCIES) 
+	@rm -f csv-replace$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(csv_replace_OBJECTS) $(csv_replace_LDADD) $(LIBS)
+
 csv-sort$(EXEEXT): $(csv_sort_OBJECTS) $(csv_sort_DEPENDENCIES) $(EXTRA_csv_sort_DEPENDENCIES) 
 	@rm -f csv-sort$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(csv_sort_OBJECTS) $(csv_sort_LDADD) $(LIBS)
@@ -404,6 +415,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/csv-add.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/csv-cut.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/csv-join.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/csv-replace.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/csv-sort.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@libs/$(DEPDIR)/cmp.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@libs/$(DEPDIR)/entries.Po@am__quote@ # am--include-marker
@@ -564,6 +576,7 @@ distclean: distclean-am
 		-rm -f ./$(DEPDIR)/csv-add.Po
 	-rm -f ./$(DEPDIR)/csv-cut.Po
 	-rm -f ./$(DEPDIR)/csv-join.Po
+	-rm -f ./$(DEPDIR)/csv-replace.Po
 	-rm -f ./$(DEPDIR)/csv-sort.Po
 	-rm -f libs/$(DEPDIR)/cmp.Po
 	-rm -f libs/$(DEPDIR)/entries.Po
@@ -617,6 +630,7 @@ maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/csv-add.Po
 	-rm -f ./$(DEPDIR)/csv-cut.Po
 	-rm -f ./$(DEPDIR)/csv-join.Po
+	-rm -f ./$(DEPDIR)/csv-replace.Po
 	-rm -f ./$(DEPDIR)/csv-sort.Po
 	-rm -f libs/$(DEPDIR)/cmp.Po
 	-rm -f libs/$(DEPDIR)/entries.Po

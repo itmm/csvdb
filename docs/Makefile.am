@@ -16,6 +16,8 @@ doc_DATA = add.html \
 	join.md \
 	ranges.html \
 	ranges.md \
+	replace.html \
+	replace.md \
 	slides/bg.svg \
 	slides/slides.css \
 	sort.html \
@@ -30,6 +32,7 @@ hx_run: add.md \
 	index.md \
 	join.md \
 	ranges.md \
+	replace.md \
 	sort.md
 	cd $(srcdir) && hx
 	date >$(srcdir)/$@

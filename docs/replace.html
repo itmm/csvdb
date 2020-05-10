@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Replacing values</title>
+<link rel="stylesheet" type="text/css" href="slides/slides.css"></head>
+<body>
+<h1>Replacing values</h1>
+<div class="slides">
+<div class="page">
+<div class="slide"><div class="slide-nr">1</div><div class="headers">
+<h1>Replacing values</h1>
+</div></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">2</div>
+<code>
+<span class="macro">@Def(<span class="name">file: ../src/csv-replace.cpp</span>)</span><br/>
+<span class="in1"></span><span class="macro">@put(<span class="name">globals</span>)</span><br/>
+<span class="in1"></span><span class="type">int</span> <span class="fn">main</span>(<br/>
+<span class="in2"></span><span class="type">int</span> <span class="var">argc</span>, <span class="type">const</span> <span class="type">char</span> *<span class="var">argv</span>[]<br/>
+<span class="in1"></span>) {<br/>
+<span class="in2"></span><span class="macro">@put(<span class="name">main</span>)</span><br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@End(<span class="name">file: ../src/csv-replace.cpp</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">3</div>
+<code>
+<span class="macro">@inc(<span class="name"><a href="ranges.html">ranges.md</a></span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">4</div>
+<code>
+<span class="macro">@inc(<span class="name"><a href="file.html">file.md</a></span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">5</div>
+<code>
+<span class="macro">@def(<span class="name">globals</span>)</span><br/>
+<span class="in1"></span><span class="keyword">#include</span> <span class="str">"libs/file.h"</span><br/>
+<span class="in1"></span><span class="keyword">#include</span> <span class="str">"libs/ranges.h"</span><br/>
+<span class="in1"></span><span class="keyword">#include</span> &lt;<span class="var">iostream</span>&gt;<br/>
+<span class="in1"></span><span class="keyword">#include</span> &lt;<span class="var">fstream</span>&gt;<br/>
+<span class="macro">@end(<span class="name">globals</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">6</div>
+<code>
+<span class="macro">@add(<span class="name">globals</span>)</span><br/>
+<span class="in1"></span><span class="type">std</span>::<span class="type">string</span> <span class="var">to</span> {};<br/>
+<span class="in1"></span><span class="type">std</span>::<span class="type">string</span> <span class="var">from</span> {};<br/>
+<span class="in1"></span><span class="type">const</span> <span class="type">char</span> *<span class="var">rngs</span> { <span class="num">nullptr</span> };<br/>
+<span class="macro">@end(<span class="name">globals</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">7</div>
+<code>
+<span class="macro">@def(<span class="name">main</span>)</span><br/>
+<span class="in1"></span>--<span class="var">argc</span>; ++<span class="var">argv</span>;<br/>
+<span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span>) {<br/>
+<span class="in2"></span><span class="var">to</span> = *<span class="var">argv</span>++; --<span class="var">argc</span>;<br/>
+<span class="in1"></span>}<br/>
+<span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span>) {<br/>
+<span class="in2"></span><span class="var">from</span> = *<span class="var">argv</span>++; --<span class="var">argc</span>;<br/>
+<span class="in1"></span>}<br/>
+<span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span>) {<br/>
+<span class="in2"></span><span class="var">rngs</span> = *<span class="var">argv</span>++; --<span class="var">argc</span>;<br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">main</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">8</div>
+<code>
+<span class="macro">@add(<span class="name">globals</span>)</span><br/>
+<span class="in1"></span><span class="keyword">static</span> <span class="type">bool</span> <span class="fn">process</span>(<span class="type">const</span> <span class="type">std</span>::<span class="type">string</span> &amp;<span class="var">name</span>, <span class="type">Ranges</span> &amp;<span class="var">rs</span>, <span class="type">bool</span> <span class="var">first</span>) {<br/>
+<span class="in2"></span><span class="type">std</span>::<span class="type">ifstream</span> <span class="var">inf</span>;<br/>
+<span class="in2"></span><span class="type">bool</span> <span class="var">from_stdin</span> { <span class="var">name</span> == <span class="str">"-"</span> };<br/>
+<span class="in2"></span><span class="keyword">if</span> (! <span class="var">from_stdin</span>) {<br/>
+<span class="in3"></span><span class="var">inf</span>.<span class="fn">open</span>(<span class="var">name</span>.<span class="fn">c_str</span>());<br/>
+<span class="in3"></span><span class="keyword">if</span> (! <span class="var">inf</span>) {<br/>
+<span class="in4"></span><span class="type">std</span>::<span class="var">cerr</span> &lt;&lt; <span class="str">"can't open "</span> &lt;&lt; <span class="var">name</span> &lt;&lt; <span class="str">"\n"</span>;<br/>
+<span class="in4"></span><span class="keyword">return</span> <span class="num">false</span>;<br/>
+<span class="in3"></span>}<br/>
+<span class="in2"></span>}<br/>
+<span class="in2"></span><span class="type">File</span> <span class="keyword">in</span> { <span class="var">from_stdin</span> ? <span class="type">std</span>::<span class="var">cin</span> : <span class="var">inf</span>};<br/>
+<span class="in2"></span><span class="keyword">if</span> (<span class="var">first</span>) {<br/>
+<span class="in3"></span><span class="keyword">in</span>.<span class="fn">header</span>().<span class="fn">write</span>();<br/>
+<span class="in3"></span><span class="keyword">if</span> (<span class="var">rngs</span>) {<br/>
+<span class="in4"></span><span class="var">rs</span> = <span class="fn">parse_ranges</span>(<span class="keyword">in</span>, &amp;<span class="var">rngs</span>, <span class="num">1</span>);<br/>
+<span class="in3"></span>} <span class="keyword">else</span> {<br/>
+<span class="in4"></span><span class="var">rs</span>.<span class="fn">emplace_back</span>();<br/>
+<span class="in3"></span>}<br/>
+<span class="in2"></span>}<br/>
+<span class="in2"></span><span class="keyword">while</span> (<span class="keyword">in</span>.<span class="fn">next_line</span>()) {<br/>
+<span class="in3"></span><span class="keyword">for</span> (<span class="type">const</span> <span class="type">auto</span> &amp;<span class="var">r</span> : <span class="var">rs</span>) {<br/>
+<span class="in4"></span><span class="keyword">for</span>(<span class="type">int</span> <span class="var">cur</span> { <span class="var">r</span>.<span class="fn">from</span>() }; <span class="var">cur</span> &lt;= <span class="keyword">in</span>.<span class="fn">columns</span>() &amp;&amp; <span class="var">cur</span> &lt;= <span class="var">r</span>.<span class="fn">to</span>(); ++<span class="var">cur</span>) {<br/>
+<span class="in5"></span><span class="keyword">if</span> (<span class="keyword">in</span>.<span class="fn">entries</span>()[<span class="var">cur</span>] == <span class="var">from</span>) {<br/>
+<span class="in6"></span><span class="keyword">in</span>.<span class="fn">entries</span>()[<span class="var">cur</span>] = <span class="var">to</span>;<br/>
+<span class="in5"></span>}<br/>
+<span class="in4"></span>}<br/>
+<span class="in3"></span>}<br/>
+<span class="in3"></span><span class="keyword">in</span>.<span class="fn">entries</span>().<span class="fn">write</span>();<br/>
+<span class="in2"></span>}<br/>
+<span class="in2"></span><span class="keyword">return</span> <span class="num">false</span>;<br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">globals</span>)</span><br/>
+</code></div>
+</div>
+<div class="page"><div class="slide"><div class="slide-nr">9</div>
+<code>
+<span class="macro">@add(<span class="name">main</span>)</span><br/>
+<span class="in1"></span><span class="keyword">if</span> (<span class="var">argc</span>) {<br/>
+<span class="in2"></span><span class="type">Ranges</span> <span class="var">rs</span>;<br/>
+<span class="in2"></span><span class="type">bool</span> <span class="var">first</span> { <span class="num">true</span> };<br/>
+<span class="in2"></span><span class="keyword">for</span> (; <span class="var">argc</span>; --<span class="var">argc</span>, ++<span class="var">argv</span>) {<br/>
+<span class="in3"></span><span class="var">first</span> = <span class="fn">process</span>(*<span class="var">argv</span>, <span class="var">rs</span>, <span class="var">first</span>);<br/>
+<span class="in2"></span>}<br/>
+<span class="in1"></span>} <span class="keyword">else</span> {<br/>
+<span class="in2"></span><span class="type">Ranges</span> <span class="var">rs</span>;<br/>
+<span class="in2"></span><span class="fn">process</span>(<span class="str">"-"</span>, <span class="var">rs</span>, <span class="num">true</span>);<br/>
+<span class="in1"></span>}<br/>
+<span class="macro">@end(<span class="name">main</span>)</span><br/>
+</code></div>
+</div>
+</body>
+</html>

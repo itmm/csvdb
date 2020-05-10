@@ -16,3 +16,7 @@
 @inc(join.md)
 ```
 
+```
+@inc(replace.md)
+```
+

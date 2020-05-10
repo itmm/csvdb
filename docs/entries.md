@@ -173,8 +173,20 @@
 	const std::string &operator[](
 		int i
 	) const {
-		@put(get)
+		@mul(get)
 		return empty_;
+	}
+@end(publics)
+```
+
+```
+@add(publics)
+	std::string &operator[](
+		int i
+	) {
+		@mul(get)
+		std::cerr << "out of bounds write\n";
+		std::exit(EXIT_FAILURE);
 	}
 @end(publics)
 ```

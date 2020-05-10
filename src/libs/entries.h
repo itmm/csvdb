@@ -53,7 +53,7 @@
 		int i
 	) const {
 		
-#line 183 "entries.md"
+#line 195 "entries.md"
 
 	if (i > 0 && i <= static_cast<int>(
 			entries_.size()
@@ -66,13 +66,33 @@
 		return empty_;
 	}
 
-#line 193 "entries.md"
+#line 183 "entries.md"
+
+	std::string &operator[](
+		int i
+	) {
+		
+#line 195 "entries.md"
+
+	if (i > 0 && i <= static_cast<int>(
+			entries_.size()
+	)) {
+		return entries_[i - 1];
+	}
+
+#line 187 "entries.md"
+
+		std::cerr << "out of bounds write\n";
+		std::exit(EXIT_FAILURE);
+	}
+
+#line 205 "entries.md"
 
 	int columns() const {
 		return entries_.size();
 	}
 
-#line 201 "entries.md"
+#line 213 "entries.md"
 
 	bool write(const Ranges &rngs, bool first = true, bool with_eol = true) const;
 	bool write(bool first = true, bool with_eol = true) const;
@@ -176,7 +196,7 @@
 
 	std::string Entries::empty_;
 
-#line 208 "entries.md"
+#line 220 "entries.md"
 
 	#include "ranges.h"
 	bool Entries::write(const Ranges &rngs, bool first, bool with_eol) const {

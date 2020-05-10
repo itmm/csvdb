@@ -50,17 +50,19 @@
 
 #line 92 "file.md"
 
+	Entries &header() { return header_; }
 	const Entries &header() const {
 		return header_;
 	}
 
-#line 100 "file.md"
+#line 101 "file.md"
 
+	Entries &entries() { return entries_; }
 	const Entries &entries() const {
 		return entries_;
 	}
 
-#line 108 "file.md"
+#line 110 "file.md"
 
 	int columns() const {
 		return header_.columns();

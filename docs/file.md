@@ -90,6 +90,7 @@
 
 ```
 @add(publics)
+	Entries &header() { return header_; }
 	const Entries &header() const {
 		return header_;
 	}
@@ -98,6 +99,7 @@
 
 ```
 @add(publics)
+	Entries &entries() { return entries_; }
 	const Entries &entries() const {
 		return entries_;
 	}
